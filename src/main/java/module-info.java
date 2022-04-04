@@ -1,4 +1,4 @@
-module SE2StartupProject {
+module DailyHelper {
     requires javafx.controls;
     requires javafx.fxml;
 
