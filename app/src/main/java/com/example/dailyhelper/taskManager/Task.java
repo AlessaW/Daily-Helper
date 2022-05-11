@@ -18,7 +18,10 @@ public class Task {
         this.category = category;
         this.description = description;
         this.duration = duration;
-        this.priority = priority;
+
+        if (priority <=1 && priority >=5 ){
+            this.priority = priority;
+        }
     }
 
     public Integer getId() {
