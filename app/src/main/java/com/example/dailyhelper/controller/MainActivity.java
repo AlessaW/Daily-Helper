@@ -3,6 +3,8 @@ package com.example.dailyhelper.controller;
 import android.os.Bundle;
 
 import com.example.dailyhelper.R;
+import com.example.dailyhelper.taskManager.Task;
+import com.example.dailyhelper.taskManager.TaskCategory;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Task playingFootball= new Task(01,"Playing Football", TaskCategory.SPORT,
+                "Playing football with the Boys and Gals",60,5);
+
+
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
