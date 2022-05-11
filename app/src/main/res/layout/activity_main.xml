@@ -1,34 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.MainActivity">
+    tools:context=".controller.MainActivity"
+    android:background="@color/lightGray">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.DailyHelper.AppBarOverlay">
+        android:layout_height="match_parent"
+        android:background="@color/lightGray">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.DailyHelper.PopupOverlay" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </com.google.android.material.appbar.AppBarLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize">
 
-    <include layout="@layout/content_main" />
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="20dp"
+                        android:src="@drawable/arrow" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+                </RelativeLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntuBold"
+                android:padding="10dp"
+                android:text="Decision Matrix"
+                android:textAllCaps="true"
+                android:textColor="@color/purple_500"
+                android:textSize="25sp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ubuntuMedium"
+                    android:padding="15dp"
+                    android:text="@string/first_item"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#00000000"
+                    android:padding="20dp"
+                    android:text="@string/manage"
+                    android:textColor="@color/purple_500"
+                    android:textSize="15sp"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </com.google.android.material.navigation.NavigationView>
+</androidx.constraintlayout.widget.ConstraintLayout>
