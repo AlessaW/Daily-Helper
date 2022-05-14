@@ -11,5 +11,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="first_item">First Item</string>
+    <string name="title">Title</string>
+    <string name="short_des">Description</string>
+    <string name="priority">Priority</string>
     <string name="manage">Manage</string>
 </resources>
