@@ -6,7 +6,7 @@ import com.example.dailyhelper.taskManager.TaskCategory;
 public class TaskManagerController {
 
     //CRUD-CREATE
-    public Task createTask(Integer id, String name, TaskCategory category, String description, Integer duration, Integer priority){
+    public Task createTask(int id, String name, TaskCategory category, String description, int duration, int priority){
         Task newTask = new Task(id, name, category, description, duration, priority);
 
         //Save new Task Object to database
@@ -15,7 +15,7 @@ public class TaskManagerController {
     }
 
     //CRUD-UPDATE: OldTask aus TaskList
-    public Task editTask(Task oldTask, String name, TaskCategory category, String description, Integer duration, Integer priority){
+    public Task editTask(Task oldTask, String name, TaskCategory category, String description, int duration, int priority){
         Task updatedTask = oldTask;
 
         if(name != null) {
@@ -27,10 +27,10 @@ public class TaskManagerController {
         if(description != null) {
             updatedTask.setDescription(description);
         }
-        if(duration != null) {
+        if(duration != 0) {
             updatedTask.setDuration(duration);
         }
-        if(priority != null) {
+        if(priority != 0) {
             updatedTask.setPriority(priority);
         }
 
@@ -40,7 +40,7 @@ public class TaskManagerController {
     }
 
     //CRUD-DELETE
-    public Task deleteTask(Integer id) {
+    public Task deleteTask(int id) {
 
         //delete Task with matching ID from database
 

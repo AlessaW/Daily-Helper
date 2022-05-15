@@ -4,15 +4,15 @@ import com.example.dailyhelper.taskManager.TaskCategory;
 
 public class Task {
 
-    private final Integer id;
+    private final int id;
     private String name;
     private TaskCategory category;
     private String description;
-    private Integer duration;
-    private Integer priority;
+    private int duration;
+    private int priority;
 
 
-    public Task(Integer id, String name, TaskCategory category, String description, Integer duration, Integer priority) {
+    public Task(int id, String name, TaskCategory category, String description, int duration, int priority) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -24,7 +24,7 @@ public class Task {
         }
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -52,19 +52,19 @@ public class Task {
         this.description = description;
     }
 
-    public Integer getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public Integer getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public void setPriority(Integer priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 }
