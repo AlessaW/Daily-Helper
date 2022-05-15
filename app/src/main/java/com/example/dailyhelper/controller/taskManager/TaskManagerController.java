@@ -6,8 +6,8 @@ import com.example.dailyhelper.taskManager.TaskCategory;
 public class TaskManagerController {
 
     //CRUD-CREATE
-    public Task createTask(int id, String name, TaskCategory category, String description, int duration, int priority){
-        Task newTask = new Task(id, name, category, description, duration, priority);
+    public Task createTask( String name, TaskCategory category, String description, int duration, int priority){
+        Task newTask = new Task( name, category, description, duration, priority);
 
         //Save new Task Object to database
 

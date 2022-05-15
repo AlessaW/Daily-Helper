@@ -2,18 +2,29 @@ package com.example.dailyhelper.taskManager;
 
 import com.example.dailyhelper.taskManager.TaskCategory;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Task {
 
-    private final int id;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    @ColumnInfo(name ="name")
     private String name;
+    @ColumnInfo(name ="category")
     private TaskCategory category;
+    @ColumnInfo(name ="description")
     private String description;
+    @ColumnInfo(name ="duration")
     private int duration;
+    @ColumnInfo(name ="priority")
     private int priority;
 
 
-    public Task(int id, String name, TaskCategory category, String description, int duration, int priority) {
-        this.id = id;
+    public Task( String name, TaskCategory category, String description, int duration, int priority) {
+
         this.name = name;
         this.category = category;
         this.description = description;
@@ -30,6 +41,10 @@ public class Task {
 
     public String getName() {
         return name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Task playingFootball= new Task(01,"Playing Football", TaskCategory.SPORT,
+        Task playingFootball= new Task("Playing Football", TaskCategory.SPORT,
                 "Playing football with the Boys and Gals",60,5);
 
 
