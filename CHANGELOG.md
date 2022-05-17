@@ -1,15 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-
-## [1.0.0] - date
-
-
+## [unreleased]
+## [1.0.0] - 2022-17-05
 ### Added
-- something
+- DataBase Connection via SQLite
+- Basic UI for TaskManager
 
 ### Improved
-- something
+- PackageStructure TaskManager: separated model into taskManager and dataBase
 
 ### Fixed
 - something
