@@ -1,6 +1,7 @@
 package com.example.dailyhelper.model.decisionmatrix;
 
 import java.util.List;
+import android.util.Log;
 
 interface IDecisionMatrix {
 

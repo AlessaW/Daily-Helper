@@ -1,11 +1,12 @@
 package com.example.dailyhelper.model.decisionmatrix;
 
 import java.util.List;
+import android.util.Log;
 
 public class DecisionMatrix6xN implements IDecisionMatrix{
 
-    private List<DecisionMatrixColumn> columns;
 
+    private List<DecisionMatrixColumn> columns;
 
     /**
      * creates a new column for options
@@ -15,6 +16,7 @@ public class DecisionMatrix6xN implements IDecisionMatrix{
     @Override
     public void makeValueColumn(String name, List<Integer> values) {
         columns.add(new DecisionMatrixColumn(name, values));
+        Log.d("Decision Matrix", "column created");
     }
 
     /**
@@ -36,6 +38,7 @@ public class DecisionMatrix6xN implements IDecisionMatrix{
     @Override
     public void nameCategory(String name) {
 
+        Log.d("Deciscion Matrix", "creating column");
     }
 
     @Override
