@@ -4,7 +4,8 @@ import java.util.List;
 
 interface IDecisionMatrix {
 
-    void makeColumn(String name);
+    void makeValueColumn(String name, List<Integer> values);
+    void makeCategoryColumn (List<String> categories);
     void changeColumnName(int column, String name);
     void nameCategory(String name);
     void fillField(int column, int row, int value);
