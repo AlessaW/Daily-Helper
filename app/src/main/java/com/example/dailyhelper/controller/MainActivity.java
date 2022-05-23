@@ -31,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button manageButton = findViewById(R.id.manage);
-        manageButton.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), InputMatrix.class);
-            startActivity(intent);
+        //commented out for getting cicd to work
+        //Button manageButton = findViewById(R.id.manage);
+        //manageButton.setOnClickListener(view -> {
+           // Intent intent = new Intent(getApplicationContext(), InputMatrix.class);
+           // startActivity(intent);
         });
 
 //        binding = ActivityMainBinding.inflate(getLayoutInflater());
