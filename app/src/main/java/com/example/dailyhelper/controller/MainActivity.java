@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         //manageButton.setOnClickListener(view -> {
            // Intent intent = new Intent(getApplicationContext(), InputMatrix.class);
            // startActivity(intent);
-        });
+        //});
 
 //        binding = ActivityMainBinding.inflate(getLayoutInflater());
 //        setContentView(binding.getRoot());
