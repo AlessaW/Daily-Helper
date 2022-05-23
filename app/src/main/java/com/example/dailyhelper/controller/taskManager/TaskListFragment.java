@@ -3,12 +3,20 @@ package com.example.dailyhelper.controller.taskManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dailyhelper.R;
+import com.example.dailyhelper.taskManagerDataBase.AppDatabase;
+import com.example.dailyhelper.taskManagerDataBase.Task;
+import com.example.dailyhelper.taskManagerDataBase.TaskCategory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +33,13 @@ public class TaskListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+
+
+    AppDatabase db;
+    List<Task> testList= new ArrayList<Task>();
 
     public TaskListFragment() {
         // Required empty public constructor
@@ -61,6 +76,29 @@ public class TaskListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_task_list, container, false);
+        View view= inflater.inflate(R.layout.fragment_task_list, container, false);
+
+        fillTestList();
+        recyclerView = view.findViewById(R.id.ListRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        db = AppDatabase.getDbInstance(view.getContext());
+
+        testList = db.TaskDao().getAllTasks();
+
+        mAdapter = new RecyclerViewAdapter(testList,getContext());
+        recyclerView.setAdapter(mAdapter);
+
+        return view;
+
+
     }
+    public void fillTestList(){
+        db =  AppDatabase.getDbInstance(getContext());
+        db.TaskDao().insertTask(new Task("playing Football", TaskCategory.SPORT,"just a casual Match of Football",30,3));
+        db.TaskDao().insertTask(new Task("Reading A book", TaskCategory.SPORT,"read any book for at least 1 hour ",1,2));
+
+    }
+
 }

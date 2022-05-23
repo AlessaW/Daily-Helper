@@ -1,4 +1,4 @@
-package com.example.dailyhelper.taskManager;
+package com.example.dailyhelper.taskManagerDataBase;
 
 public enum TaskCategory {
     SPORT("Sport"),

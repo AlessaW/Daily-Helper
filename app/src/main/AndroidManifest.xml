@@ -11,7 +11,7 @@
         android:theme="@style/Theme.DailyHelper" >
         <activity
             android:name=".controller.taskManager.TaskManagerActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".controller.MainActivity"
             android:exported="true"

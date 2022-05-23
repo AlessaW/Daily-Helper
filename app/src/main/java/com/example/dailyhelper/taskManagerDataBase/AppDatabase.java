@@ -1,7 +1,6 @@
-package com.example.dailyhelper.taskManager;
+package com.example.dailyhelper.taskManagerDataBase;
 
 import android.content.Context;
-import android.sax.RootElement;
 
 import androidx.room.Database;
 import androidx.room.Room;

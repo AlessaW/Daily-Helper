@@ -1,4 +1,4 @@
-package com.example.dailyhelper.taskManager;
+package com.example.dailyhelper.taskManagerDataBase;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
