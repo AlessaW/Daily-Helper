@@ -1,12 +1,9 @@
 package com.example.dailyhelper.controller.taskManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,13 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.example.dailyhelper.R;
-import com.example.dailyhelper.taskManagerDataBase.AppDatabase;
-import com.example.dailyhelper.taskManagerDataBase.Task;
-import com.example.dailyhelper.taskManagerDataBase.TaskCategory;
-import com.example.dailyhelper.taskManagerDataBase.TaskSingletonPattern;
+import com.example.dailyhelper.model.database.AppDatabase;
+import com.example.dailyhelper.model.taskmanager.Task;
+import com.example.dailyhelper.model.taskmanager.TaskCategory;
+import com.example.dailyhelper.model.taskmanager.TaskSingletonPattern;
 
 import java.util.ArrayList;
 import java.util.List;

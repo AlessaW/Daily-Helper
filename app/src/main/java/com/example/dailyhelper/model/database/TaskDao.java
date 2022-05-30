@@ -1,9 +1,11 @@
-package com.example.dailyhelper.taskManagerDataBase;
+package com.example.dailyhelper.model.database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.dailyhelper.model.taskmanager.Task;
 
 import java.util.List;
 

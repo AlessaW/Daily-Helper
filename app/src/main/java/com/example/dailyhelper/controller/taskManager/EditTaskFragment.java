@@ -4,16 +4,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.dailyhelper.R;
-import com.example.dailyhelper.taskManagerDataBase.AppDatabase;
-import com.example.dailyhelper.taskManagerDataBase.Task;
-import com.example.dailyhelper.taskManagerDataBase.TaskSingletonPattern;
+import com.example.dailyhelper.model.database.AppDatabase;
+import com.example.dailyhelper.model.taskmanager.Task;
+import com.example.dailyhelper.model.taskmanager.TaskSingletonPattern;
 
 import java.util.ArrayList;
 import java.util.List;

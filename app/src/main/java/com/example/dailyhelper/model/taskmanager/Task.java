@@ -1,4 +1,4 @@
-package com.example.dailyhelper.taskManagerDataBase;
+package com.example.dailyhelper.model.taskmanager;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

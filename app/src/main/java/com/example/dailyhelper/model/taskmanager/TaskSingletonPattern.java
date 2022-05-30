@@ -1,7 +1,4 @@
-package com.example.dailyhelper.taskManagerDataBase;
-
-import androidx.room.ColumnInfo;
-import androidx.room.PrimaryKey;
+package com.example.dailyhelper.model.taskmanager;
 
 public class TaskSingletonPattern {
 
