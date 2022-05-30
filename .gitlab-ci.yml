@@ -69,6 +69,8 @@ lintDebug:
 # Make Project
 assembleDebug:
   interruptible: true
+  needs:
+    - lintDebug
   stage: build
   script:
     - ./gradlew assembleDebug
@@ -79,6 +81,18 @@ assembleDebug:
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
   interruptible: true
+  needs: 
+    - assembleDebug
   stage: test
   script:
     - ./gradlew -Pci --console=plain :app:testDebug
+
+package:
+  needs:
+    - assembleDebug
+    - debugTests
+  stage: deploy
+  script:
+    - echo "We are deploying"
+  only:
+    - production
