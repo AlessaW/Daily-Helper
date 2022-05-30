@@ -6,45 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".controller.taskManager.TaskManagerActivity">
 
-    <TextView
-        android:id="@+id/TitleOfTaskManagerActivity"
-        android:layout_width="58dp"
-        android:layout_height="14dp"
-        android:text="Task Manager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="409dp"
         android:layout_height="48dp"
-        android:layout_marginTop="1dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitleOfTaskManagerActivity">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/ShowTasks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Tasks" />
+            android:text="Tasks"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/AddTask"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="New Task" />
+            android:text="New Task"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/EditTask"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Edit Task" />
+            android:text="Edit Task"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView
@@ -54,7 +47,9 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
