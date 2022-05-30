@@ -4,11 +4,19 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.dailyhelper.R;
+import com.example.dailyhelper.taskManagerDataBase.AppDatabase;
+import com.example.dailyhelper.taskManagerDataBase.Task;
+import com.example.dailyhelper.taskManagerDataBase.TaskSingletonPattern;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +33,10 @@ public class EditTaskFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private EditText editTaskName;
+
+    List<Task> testList= new ArrayList<Task>();
+    AppDatabase db;
 
     public EditTaskFragment() {
         // Required empty public constructor
@@ -55,12 +67,25 @@ public class EditTaskFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_task, container, false);
+        View view= inflater.inflate(R.layout.fragment_edit_task, container, false);
+
+
+        db = AppDatabase.getDbInstance(view.getContext());
+
+        testList = db.TaskDao().getAllTasks();
+
+       editTaskName= view.findViewById(R.id.editTaskName);
+
+       editTaskName.setText(TaskSingletonPattern.getInstance().getName());
+
+        return view;
     }
 }

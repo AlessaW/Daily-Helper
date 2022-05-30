@@ -4,9 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dailyhelper.R;
@@ -18,10 +20,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     List<Task> tasksList;
     Context context;
+    private OnItemListener mOnItemListener;
 
-    public RecyclerViewAdapter(List<Task> tasksList, Context context) {
+    public RecyclerViewAdapter(List<Task> tasksList, Context context,OnItemListener onItemListener) {
         this.tasksList = tasksList;
         this.context = context;
+        this.mOnItemListener=onItemListener;
     }
 
     @NonNull
@@ -29,7 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_list_recyclerview, parent, false);
-        MyViewHolder holder = new MyViewHolder(view);
+        MyViewHolder holder = new MyViewHolder(view,mOnItemListener);
 
         return holder;
     }
@@ -51,7 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return tasksList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView Name;
         TextView Category;
@@ -59,8 +63,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView Priority;
         TextView Description;
 
+        OnItemListener onItemListener;
 
-        public MyViewHolder(@NonNull View itemView) {
+
+        public MyViewHolder(@NonNull View itemView,OnItemListener onItemListener) {
             super(itemView);
             Name = itemView.findViewById(R.id.taskListName);
             Category = itemView.findViewById(R.id.taskListCategory);
@@ -68,8 +74,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Priority = itemView.findViewById(R.id.taskListPriority);
             Description = itemView.findViewById(R.id.taskListDescription);
 
+
+
+            this.onItemListener = onItemListener;
+            itemView.setOnClickListener(this);
         }
 
 
+        @Override
+        public void onClick(View view) {
+            onItemListener.onItemClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnItemListener{
+        void onItemClick(int position);
     }
 }
