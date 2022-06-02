@@ -1,6 +1,4 @@
-package com.example.dailyhelper.taskManager;
-
-import com.example.dailyhelper.taskManager.TaskCategory;
+package com.example.dailyhelper.taskManagerDataBase;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -45,6 +43,13 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "category=" + category +
+                '}';
     }
 
     public void setName(String name) {

@@ -3,8 +3,8 @@ package com.example.dailyhelper.controller;
 import android.os.Bundle;
 
 import com.example.dailyhelper.R;
-import com.example.dailyhelper.taskManager.Task;
-import com.example.dailyhelper.taskManager.TaskCategory;
+import com.example.dailyhelper.taskManagerDataBase.Task;
+import com.example.dailyhelper.taskManagerDataBase.TaskCategory;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
