@@ -19,6 +19,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="CustomChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@drawable/chip_style</item>
+        <item name="android:textColor">@drawable/chip_text_style</item>
+        <item name="checkedIconTint">@color/white</item>
+    </style>
+
     <style name="Theme.DailyHelper.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.DailyHelper.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

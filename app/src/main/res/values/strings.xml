@@ -11,4 +11,10 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Required Strings for Scheduler-->
+    <string name="scheduler_title">Scheduler</string>
+    <string name="scheduler_result">Result</string>
+    <string name="filter_duration">Duration</string>
+    <string name="filter_2">Filter 2</string>
+    <string name="filter_3">Filter 3</string>
 </resources>
