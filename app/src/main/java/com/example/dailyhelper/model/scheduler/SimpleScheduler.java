@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 /**
  *
+ *
+ * prio 1 is most important
  */
 
 public class SimpleScheduler implements IScheduler {
@@ -24,20 +26,21 @@ public class SimpleScheduler implements IScheduler {
 
     private double probabilityFactor;
 
+    private static int NUMBER_OF_PRIOS = 4;
 
 
 
-    SimpleScheduler(AppDatabase appDatabase,){
+
+    SimpleScheduler(AppDatabase appDatabase){
         this.appDatabase = appDatabase;
         this.taskList = appDatabase.TaskDao().getAllTasks();
         this.probabilityFactor = 1.35;
         this.listTime = 0;
 
-        prioMatrix.add(createPrioList(1));
-        prioMatrix.add(createPrioList(2));
-        prioMatrix.add(createPrioList(3));
-        prioMatrix.add(createPrioList(4));
-        prioMatrix.add(createPrioList(5));
+        for (int i = 0; i < NUMBER_OF_PRIOS; i++) {
+            prioMatrix.add(createPrioList(i+1));
+        }
+
         Log.d("SimpleScheduler", "SimpleScheduler created");
     }
 
@@ -98,12 +101,11 @@ public class SimpleScheduler implements IScheduler {
         int result;
         if(compareLength == 0){
             switch (prio){
-                case 3: result = prioMatrix.get(0).getLengthInRandomsList();
-                        result = setCompareLength(prio-1, result);
-                case 4: result = prioMatrix.get(1).getLengthInRandomsList();
-                    result = setCompareLength(prio-1, result);
-                case 5: result = prioMatrix.get(2).getLengthInRandomsList();
-                    result = setCompareLength(prio-1, result);
+
+                case 2: result = prioMatrix.get(3).getLengthInRandomsList();
+                    result = setCompareLength(prio+1, result);
+                case 1: result = prioMatrix.get(2).getLengthInRandomsList();
+                    result = setCompareLength(prio+1, result);
                 default: result = 0;
 
             }
@@ -114,7 +116,7 @@ public class SimpleScheduler implements IScheduler {
     }
 
     private void addIfTooSmall(int prio){
-        int compareLength = prioMatrix.get(prio-2).lengthInRandomsList;
+        int compareLength = prioMatrix.get(prio).lengthInRandomsList;
         compareLength = setCompareLength(prio, compareLength);
 
         PrioList prioList = prioMatrix.get(prio-1);
@@ -135,12 +137,12 @@ public class SimpleScheduler implements IScheduler {
     }
 
     private void fillRandoms(){
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < NUMBER_OF_PRIOS; i++) {
             randoms.addAll(prioMatrix.get(i).prioList);
             prioMatrix.get(i).setLengthInRandomsList(prioMatrix.get(i).getPrioList().size());
         }
 
-        for (int i = 2; i < 6; i++) {
+        for (int i = NUMBER_OF_PRIOS; i > 1 + 1; i--) {
             addIfTooSmall(i);
         }
     }
