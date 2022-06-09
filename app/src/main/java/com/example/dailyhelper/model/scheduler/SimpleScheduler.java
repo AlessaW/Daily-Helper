@@ -142,7 +142,7 @@ public class SimpleScheduler implements IScheduler {
             prioMatrix.get(i).setLengthInRandomsList(prioMatrix.get(i).getPrioList().size());
         }
 
-        for (int i = NUMBER_OF_PRIOS; i > 1 + 1; i--) {
+        for (int i = NUMBER_OF_PRIOS; i > 1; i--) {
             addIfTooSmall(i);
         }
     }
