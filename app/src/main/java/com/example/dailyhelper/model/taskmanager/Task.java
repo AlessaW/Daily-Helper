@@ -21,7 +21,7 @@ public class Task {
     private int priority;
 
 
-    public Task( String name, TaskCategory category, String description, int duration, int priority) {
+    public Task(String name, TaskCategory category, String description, int duration, int priority) {
 
         this.name = name;
         this.category = category;
@@ -31,6 +31,10 @@ public class Task {
         if (priority <=1 && priority >=5 ){
             this.priority = priority;
         }
+    }
+
+    public Task() {
+
     }
 
     public int getId() {

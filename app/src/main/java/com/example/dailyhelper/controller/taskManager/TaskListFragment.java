@@ -16,7 +16,6 @@ import com.example.dailyhelper.R;
 import com.example.dailyhelper.model.database.AppDatabase;
 import com.example.dailyhelper.model.taskmanager.Task;
 import com.example.dailyhelper.model.taskmanager.TaskCategory;
-import com.example.dailyhelper.model.taskmanager.TaskSingletonPattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +102,7 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
         db =  AppDatabase.getDbInstance(getContext());
         if (db.TaskDao().getAllTasks().isEmpty() ) {
             db.TaskDao().insertTask(new Task("playing Football", TaskCategory.SPORT, "just a casual Match of Football", 30, 3));
-            db.TaskDao().insertTask(new Task("Reading A book", TaskCategory.SPORT, "read any book for at least 1 hour ", 1, 2));
+            db.TaskDao().insertTask(new Task("Reading A book", TaskCategory.UNIVERSITY, "read any book for at least 1 hour ", 1, 2));
 
         }
 
@@ -111,14 +110,24 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
 
     @Override
     public void onItemClick(int position) {
-        String name = testList.get(position).getName();
-        TaskSingletonPattern.getInstance().setId(testList.get(position).getId());
-        TaskSingletonPattern.getInstance().setName(name);
-        Log.i("what",TaskSingletonPattern.getInstance().getName());
+
+        int id = testList.get(position).getId();
+
+
+        EditTaskFragment fragment = new EditTaskFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("Id",id);
+
+        fragment.setArguments(bundle);
+
+        Log.i("what", String.valueOf(bundle.getInt("Id")));
+
+
 
         FragmentTransaction fragmentTransaction = getActivity()
                 .getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainerView, new EditTaskFragment());
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
         fragmentTransaction.commit();
     }
 

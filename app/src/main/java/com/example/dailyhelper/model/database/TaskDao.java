@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.dailyhelper.model.taskmanager.Task;
+import com.example.dailyhelper.model.taskmanager.TaskCategory;
 
 import java.util.List;
 
@@ -15,8 +16,10 @@ public interface TaskDao {
     @Query("SELECT * FROM task")
     List<Task> getAllTasks();
 
-    @Query("Update Task set name = :sName Where id= :id")
-    void update(int id,String sName);
+    @Query("Update Task set name = :iName, category = :iCategory,description = :iDescription" +
+            ", duration = :iDuration, priority = :iPriority Where id= :id")
+    void update(int id, String iName, TaskCategory iCategory, String iDescription,
+                int iDuration, int iPriority);
 
     @Insert
     void insertTask(Task... task);
