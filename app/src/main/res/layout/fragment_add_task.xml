@@ -50,7 +50,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <EditText
-            android:id="@+id/addTaskDexcription"
+            android:id="@+id/addTaskDescription"
             android:layout_width="365dp"
             android:layout_height="48dp"
             android:layout_marginTop="36dp"
@@ -156,7 +156,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.231"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addTaskDexcription" />
+            app:layout_constraintTop_toBottomOf="@+id/addTaskDescription" />
 
         <Button
             android:id="@+id/addTaskCancelButton"
@@ -167,6 +167,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toEndOf="@+id/addTaskButton"
-            app:layout_constraintTop_toBottomOf="@+id/addTaskDexcription" />
+            app:layout_constraintTop_toBottomOf="@+id/addTaskDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

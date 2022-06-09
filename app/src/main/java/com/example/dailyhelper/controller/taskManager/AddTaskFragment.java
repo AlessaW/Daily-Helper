@@ -3,12 +3,18 @@ package com.example.dailyhelper.controller.taskManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.dailyhelper.R;
+import com.example.dailyhelper.model.database.AppDatabase;
+import com.example.dailyhelper.model.taskmanager.Task;
+import com.example.dailyhelper.model.taskmanager.TaskCategory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +31,15 @@ public class AddTaskFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private EditText addTaskName;
+    private EditText addTaskCategory;
+    private EditText addTaskDuration;
+    private EditText addTaskPriority;
+    private EditText addTaskDescription;
+    private Button addItemButton;
+    private Button addTaskCancelButton;
+
+    AppDatabase db;
 
     public AddTaskFragment() {
         // Required empty public constructor
@@ -60,7 +75,43 @@ public class AddTaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_task, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_task, container, false);
+        addTaskName = view.findViewById(R.id.addTaskName);
+        addTaskCategory = view.findViewById(R.id.addTaskCategory);
+        addTaskDuration = view.findViewById(R.id.addTaskDuration);
+        addTaskPriority = view.findViewById(R.id.addTaskPriority);
+        addTaskDescription = view.findViewById(R.id.addTaskDescription);
+        addItemButton = view.findViewById(R.id.addTaskButton);
+        addTaskCancelButton = view.findViewById(R.id.addTaskCancelButton);
+
+        db = AppDatabase.getDbInstance(view.getContext());
+
+        addItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.TaskDao().insertTask(new Task(
+                        addTaskName.getText().toString(),
+                        TaskCategory.valueOf(addTaskCategory.getText().toString()),
+                        addTaskDescription.getText().toString(),
+                        Integer.parseInt(addTaskDuration.getText().toString()),
+                        Integer.parseInt(addTaskPriority.getText().toString())
+                ));
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerView, new TaskListFragment());
+                fragmentTransaction.commit();
+            }
+        });
+
+        addTaskCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity()
+                        .getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerView, new TaskListFragment());
+                fragmentTransaction.commit();
+            }
+        });
+
+        return view;
     }
 }
