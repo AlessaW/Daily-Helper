@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginEnd="80dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginEnd="80dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginEnd="80dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -124,12 +124,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:text="Description"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.032"
+            app:layout_constraintHorizontal_bias="0.031"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTaskPriority" />
 
@@ -138,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginEnd="80dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -150,10 +150,10 @@
             android:id="@+id/editTaskButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="88dp"
+            android:layout_marginTop="40dp"
             android:text="Apply"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.253"
+            app:layout_constraintHorizontal_bias="0.25"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTaskDescription" />
 
@@ -161,11 +161,23 @@
             android:id="@+id/editTaskCancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="88dp"
+            android:layout_marginTop="40dp"
             android:text="Cancel"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.469"
             app:layout_constraintStart_toEndOf="@+id/editTaskButton"
             app:layout_constraintTop_toBottomOf="@+id/editTaskDescription" />
+
+        <Button
+            android:id="@+id/deleteTaskButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Delete"
+            app:layout_constraintEnd_toStartOf="@+id/editTaskCancelButton"
+            app:layout_constraintHorizontal_bias="0.45"
+            app:layout_constraintStart_toEndOf="@+id/editTaskButton"
+            app:layout_constraintTop_toBottomOf="@+id/editTaskCancelButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
