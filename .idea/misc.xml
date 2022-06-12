@@ -7,8 +7,11 @@
         <entry key="app/src/main/res/drawable/shape.xml" value="0.201" />
         <entry key="app/src/main/res/font/font.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29442149728968525" />
-        <entry key="app/src/main/res/layout/activity_scheduler.xml" value="0.21581420898437503" />
+        <entry key="app/src/main/res/layout/activity_scheduler.xml" value="0.19001617431640627" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/scheduler.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/task_list_recyclerview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.19610507246376813" />
       </map>
     </option>
   </component>
