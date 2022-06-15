@@ -21,7 +21,7 @@ public class SimpleScheduler implements IScheduler {
     private List<Task> taskList;
     //the time the tasks in the taskList take
     private int listTime;
-    private List<PrioList> prioMatrix = new ArrayList<PrioList>(5);
+    private List<PrioList> prioMatrix = new ArrayList<PrioList>(NUMBER_OF_PRIOS);
     List<Task> randoms = new ArrayList<>();
 
     private double probabilityFactor;
@@ -31,7 +31,7 @@ public class SimpleScheduler implements IScheduler {
 
 
 
-    SimpleScheduler(AppDatabase appDatabase){
+    public SimpleScheduler(AppDatabase appDatabase){
         this.appDatabase = appDatabase;
         this.taskList = appDatabase.TaskDao().getAllTasks();
         this.probabilityFactor = 1.35;
@@ -53,19 +53,22 @@ public class SimpleScheduler implements IScheduler {
     @Override
     public List<Task> scheduleTasks(int time) {
 
+        fillRandoms();
+
         int randomIndex;
         List<Task> result = new ArrayList<>();
 
         Log.d("SimpleScheduler", "started scheduling");
 
-        while(listTime != time && randoms.size() != 0){
+        while(listTime <= time && randoms.size() != 0){
             randomIndex = (int) (Math.random()*randoms.size()-1);
             Task currentTask = randoms.get(randomIndex);
             if(time-listTime >= currentTask.getDuration()){
                 result.add(currentTask);
+                listTime+= currentTask.getDuration();
             }
-            listTime+= currentTask.getDuration();
-            removeFromRandoms(currentTask);
+
+            removeAllOfObject(randoms, currentTask);
         }
 
         Log.d("SimpleScheduler", "finished scheduling");
@@ -73,10 +76,10 @@ public class SimpleScheduler implements IScheduler {
 
     }
 
-    private void removeFromRandoms(Object o){
+    private void removeAllOfObject(List list, Object o){
         boolean notAll = true;
         while (notAll){
-            notAll = randoms.remove(o);
+            notAll = list.remove(o);
         }
     }
 
@@ -94,7 +97,7 @@ public class SimpleScheduler implements IScheduler {
     /**
      * sets compareLength to length of lower prio list if compareLength is zero
      * @param prio
-     * @param compareLength length of List with prio-1
+     * @param compareLength length of List with prio+1
      * @return
      */
     private int setCompareLength(int prio, int compareLength){
@@ -134,6 +137,7 @@ public class SimpleScheduler implements IScheduler {
                 prioLength++;
             }
         }
+        prioMatrix.get(prio-1).setLengthInRandomsList(prioLength);
     }
 
     private void fillRandoms(){
@@ -142,7 +146,7 @@ public class SimpleScheduler implements IScheduler {
             prioMatrix.get(i).setLengthInRandomsList(prioMatrix.get(i).getPrioList().size());
         }
 
-        for (int i = NUMBER_OF_PRIOS; i > 1; i--) {
+        for (int i = NUMBER_OF_PRIOS-1; i >= 1; i--) {
             addIfTooSmall(i);
         }
     }
