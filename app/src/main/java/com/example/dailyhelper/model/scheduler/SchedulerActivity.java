@@ -1,8 +1,12 @@
 package com.example.dailyhelper.model.scheduler;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import com.example.dailyhelper.R;
 
@@ -10,14 +14,17 @@ import java.util.ArrayList;
 
 public class SchedulerActivity extends AppCompatActivity {
 
-    ListView listView;
+    private ListView listView;
     private static final String TAG = "SchedulerActivity";
+    private Button resultButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduler);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Log.d(TAG, "onCreate: Started");
+
         listView = findViewById(R.id.listview);
 
         ArrayList<Task> arrayList = new ArrayList<>();

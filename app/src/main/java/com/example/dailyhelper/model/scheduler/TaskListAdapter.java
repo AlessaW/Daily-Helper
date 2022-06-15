@@ -37,7 +37,7 @@ public class TaskListAdapter extends ArrayAdapter<Task> {
         String title = getItem(position).getTitle();
         String des = getItem(position).getDescription();
         int prio = getItem(position).getPriority();
-        
+
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
