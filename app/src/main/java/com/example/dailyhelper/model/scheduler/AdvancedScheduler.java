@@ -1,7 +1,6 @@
 package com.example.dailyhelper.model.scheduler;
 
-import com.example.dailyhelper.taskManagerDataBase.Task;
-import com.example.dailyhelper.taskManagerDataBase.Task;
+import com.example.dailyhelper.model.taskmanager.Task;
 
 import java.util.List;
 
