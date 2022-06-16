@@ -7,11 +7,12 @@ import androidx.room.Room;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.example.dailyhelper.model.database.AppDatabase;
 import com.example.dailyhelper.model.scheduler.IScheduler;
 import com.example.dailyhelper.model.scheduler.SimpleScheduler;
-import com.example.dailyhelper.taskManagerDataBase.AppDatabase;
-import com.example.dailyhelper.taskManagerDataBase.Task;
-import com.example.dailyhelper.taskManagerDataBase.TaskCategory;
+import com.example.dailyhelper.model.taskmanager.Task;
+import com.example.dailyhelper.model.taskmanager.TaskCategory;
+
 
 import org.junit.Assert;
 import org.junit.Test;

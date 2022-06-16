@@ -1,7 +1,7 @@
 package com.example.dailyhelper.controller.taskManager;
 
-import com.example.dailyhelper.taskManagerDataBase.Task;
-import com.example.dailyhelper.taskManagerDataBase.TaskCategory;
+import com.example.dailyhelper.model.taskmanager.Task;
+import com.example.dailyhelper.model.taskmanager.TaskCategory;
 
 public class TaskManagerController {
 

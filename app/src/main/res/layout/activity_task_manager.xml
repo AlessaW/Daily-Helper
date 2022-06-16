@@ -31,13 +31,6 @@
             android:text="New Task"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/EditTask"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Edit Task"
-            android:textSize="18sp" />
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView

@@ -2,12 +2,17 @@ package com.example.dailyhelper.model.scheduler;
 
 import android.util.Log;
 
-import com.example.dailyhelper.taskManagerDataBase.AppDatabase;
-import com.example.dailyhelper.taskManagerDataBase.Task;
+import com.example.dailyhelper.model.database.AppDatabase;
+import com.example.dailyhelper.model.taskmanager.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  *
@@ -33,7 +38,21 @@ public class SimpleScheduler implements IScheduler {
 
     public SimpleScheduler(AppDatabase appDatabase){
         this.appDatabase = appDatabase;
-        this.taskList = appDatabase.TaskDao().getAllTasks();
+
+        appDatabase.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Task>>() {
+                    @Override
+                    public void accept(List<Task> tasks) throws Throwable {
+                        taskList = tasks;
+
+                        Log.i("Thread Task List"," Processing on Thread " +Thread.currentThread().getName());
+                    }
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
         this.probabilityFactor = 1.35;
         this.listTime = 0;
 
