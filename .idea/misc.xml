@@ -7,9 +7,17 @@
         <entry key="app/src/main/res/drawable/shape.xml" value="0.201" />
         <entry key="app/src/main/res/font/font.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29442149728968525" />
-        <entry key="app/src/main/res/layout/activity_scheduler.xml" value="0.19001617431640627" />
+        <entry key="app/src/main/res/layout/activity_scheduler.xml" value="0.2929901123046875" />
+        <entry key="app/src/main/res/layout/activity_task_manager.xml" value="0.1595744680851064" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.1595744680851064" />
+        <entry key="app/src/main/res/layout/fragment_add_duration.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/fragment_add_task.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.1595744680851064" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_task_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/scheduler.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/scheduler_list_item.xml" value="0.1595744680851064" />
         <entry key="app/src/main/res/layout/task_list_recyclerview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/test.xml" value="0.19610507246376813" />
       </map>
