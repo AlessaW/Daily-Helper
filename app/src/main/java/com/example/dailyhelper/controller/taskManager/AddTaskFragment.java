@@ -16,6 +16,12 @@ import com.example.dailyhelper.model.database.AppDatabase;
 import com.example.dailyhelper.model.taskmanager.Task;
 import com.example.dailyhelper.model.taskmanager.TaskCategory;
 
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddTaskFragment#newInstance} factory method to
@@ -95,7 +101,26 @@ public class AddTaskFragment extends Fragment {
                         addTaskDescription.getText().toString(),
                         Integer.parseInt(addTaskDuration.getText().toString()),
                         Integer.parseInt(addTaskPriority.getText().toString())
-                ));
+                )).subscribeOn(Schedulers.computation())
+                        .subscribe(new CompletableObserver() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+                        });
+
+
+
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentContainerView, new TaskListFragment());
                 fragmentTransaction.commit();

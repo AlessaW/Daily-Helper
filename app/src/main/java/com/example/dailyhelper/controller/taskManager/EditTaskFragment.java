@@ -17,8 +17,22 @@ import com.example.dailyhelper.model.database.AppDatabase;
 import com.example.dailyhelper.model.taskmanager.Task;
 import com.example.dailyhelper.model.taskmanager.TaskCategory;
 
+import org.reactivestreams.Subscription;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.FlowableSubscriber;
+import io.reactivex.rxjava3.core.MaybeObserver;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,12 +56,12 @@ public class EditTaskFragment extends Fragment {
     private EditText editTaskDescription;
     private Button editItemButton;
     private Button editTaskCancelButton;
-
+    private Button editDeleteTaskButton;
     int itemId;
 
     List<Task> testList= new ArrayList<Task>();
     AppDatabase db;
-
+    Task task = new Task();
     public EditTaskFragment() {
         // Required empty public constructor
     }
@@ -88,11 +102,44 @@ public class EditTaskFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_edit_task, container, false);
 
 
+        Bundle bundle = this.getArguments();
+        itemId=bundle.getInt("Id");
+
         db = AppDatabase.getDbInstance(view.getContext());
 
-        testList = db.TaskDao().getAllTasks();
+        db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Consumer<List<Task>>() {
+                     @Override
+                     public void accept(List<Task> tasks) throws Throwable {
+                         testList= tasks;
+                         Log.i("Thread Edit list"," Processing on Thread " +Thread.currentThread().getName());
+                         Log.i("is list Empty ?","Size is " + testList.size());
+                         if(itemId>=0){
 
-        editTaskName= view.findViewById(R.id.editTaskName);
+                             for (Task t: testList){
+                                 if (t.getId()==itemId) {
+                                     task = t;
+
+                                 }
+                             }
+                         }
+                         Log.i("yes", task.getName());
+
+                         editTaskName.setText(task.getName());
+                         editTaskCategory.setText(String.valueOf(task.getCategory()));
+                         editTaskPriority.setText(String.valueOf(task.getPriority()));
+                         editTaskDuration.setText(String.valueOf(task.getDuration()));
+                         editTaskDescription.setText(task.getDescription());
+                     }
+
+                     public void onError( Throwable e) {
+
+                     }
+                 });
+
+        editDeleteTaskButton= view.findViewById(R.id.deleteTaskButton);
+        editTaskName = view.findViewById(R.id.editTaskName);
         editTaskCategory=view.findViewById(R.id.editTaskCategory);
         editTaskDuration=view.findViewById(R.id.editTaskDuration);
         editTaskPriority=view.findViewById(R.id.editTaskPriority);
@@ -100,30 +147,34 @@ public class EditTaskFragment extends Fragment {
         editItemButton=view.findViewById(R.id.editTaskButton);
         editTaskCancelButton=view.findViewById(R.id.editTaskCancelButton);
 
-        Bundle bundle = this.getArguments();
-        itemId=bundle.getInt("Id");
 
-        Task task = new Task();
+        editDeleteTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.TaskDao().delete(task).subscribeOn(Schedulers.io())
+                        .subscribe(new CompletableObserver() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
 
-        if(itemId>=0){
+                            }
 
-            for (Task t: testList){
-                if (t.getId()==itemId) {
-                    task = t;
-                }
+                            @Override
+                            public void onComplete() {
+                                Log.i("Thread Item Delete"," Processing on Thread " +Thread.currentThread().getName());
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+                        });
+
+                FragmentTransaction fragmentTransaction = getActivity()
+                        .getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerView, new TaskListFragment());
+                fragmentTransaction.commit();
             }
-
-        } else {
-
-        }
-
-        Log.i("yes", task.getName());
-
-       editTaskName.setText(task.getName());
-       editTaskCategory.setText(String.valueOf(task.getCategory()));
-       editTaskPriority.setText(String.valueOf(task.getPriority()));
-       editTaskDuration.setText(String.valueOf(task.getDuration()));
-       editTaskDescription.setText(task.getDescription());
+        });
 
        editItemButton.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -132,7 +183,24 @@ public class EditTaskFragment extends Fragment {
                        TaskCategory.valueOf(editTaskCategory.getText().toString()),
                        editTaskDescription.getText().toString(),
                        Integer.parseInt(editTaskDuration.getText().toString()),
-                       Integer.parseInt(editTaskPriority.getText().toString()));
+                       Integer.parseInt(editTaskPriority.getText().toString()))
+                       .subscribeOn(Schedulers.io())
+                       .subscribe(new CompletableObserver() {
+                           @Override
+                           public void onSubscribe(@NonNull Disposable d) {
+
+                           }
+
+                           @Override
+                           public void onComplete() {
+                               Log.i("Thread Edit Item"," Processing on Thread " +Thread.currentThread().getName());
+                           }
+
+                           @Override
+                           public void onError(@NonNull Throwable e) {
+
+                           }
+                       });
 
                FragmentTransaction fragmentTransaction = getActivity()
                        .getSupportFragmentManager().beginTransaction();

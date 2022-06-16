@@ -18,8 +18,19 @@ import com.example.dailyhelper.model.taskmanager.Task;
 import com.example.dailyhelper.model.taskmanager.TaskCategory;
 
 
+import org.reactivestreams.Subscription;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.FlowableSubscriber;
+import io.reactivex.rxjava3.core.MaybeObserver;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,8 +50,9 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
+    private RecyclerViewAdapter cAdapter;
 
-    AppDatabase db;
+     AppDatabase db;
     List<Task> testList= new ArrayList<Task>();
 
     public TaskListFragment() {
@@ -83,31 +95,50 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
         View view= inflater.inflate(R.layout.fragment_task_list, container, false);
 
 
-        fillTestList();
+//        fillTestList();
         recyclerView = view.findViewById(R.id.ListRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        db = AppDatabase.getDbInstance(view.getContext());
 
-        testList = db.TaskDao().getAllTasks();
 
-        mAdapter = new RecyclerViewAdapter(testList,getContext(),this);
-        recyclerView.setAdapter(mAdapter);
+
+
+      db = AppDatabase.getDbInstance(view.getContext());
+
+         db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(new Consumer<List<Task>>() {
+
+                     @Override
+                     public void accept(List<Task> tasks) throws Throwable {
+                         testList =tasks;
+                        mAdapter = new RecyclerViewAdapter(testList,getContext(),TaskListFragment.this::onItemClick);
+                        recyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+
+                        Log.i("Thread Task List"," Processing on Thread " +Thread.currentThread().getName());
+                     }
+                     public void onError(@NonNull Throwable e) {
+
+                     }
+
+                 });
+
 
         return view;
 
 
     }
-    public void fillTestList(){
-        db =  AppDatabase.getDbInstance(getContext());
-        if (db.TaskDao().getAllTasks().isEmpty() ) {
-            db.TaskDao().insertTask(new Task("playing Football", TaskCategory.SPORT, "just a casual Match of Football", 30, 3));
-            db.TaskDao().insertTask(new Task("Reading A book", TaskCategory.UNIVERSITY, "read any book for at least 1 hour ", 1, 2));
-
-        }
-
-    }
+//    public void fillTestList(){
+//        db =  AppDatabase.getDbInstance(getContext());
+//        if (db.TaskDao().getAllTasks().isEmpty() ) {
+//            db.TaskDao().insertTask(new Task("playing Football", TaskCategory.SPORT, "just a casual Match of Football", 30, 3));
+//            db.TaskDao().insertTask(new Task("Reading A book", TaskCategory.UNIVERSITY, "read any book for at least 1 hour ", 1, 2));
+//
+//        }
+//
+//    }
 
     @Override
     public void onItemClick(int position) {
