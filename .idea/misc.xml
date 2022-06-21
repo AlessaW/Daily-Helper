@@ -26,6 +26,8 @@
         <entry key="app/src/main/res/drawable/shape.xml" value="0.201" />
         <entry key="app/src/main/res/font/font.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29442149728968525" />
+        <entry key="app/src/main/res/layout/activity_scheduler.xml" value="0.21965579710144928" />
+        <entry key="app/src/main/res/layout/fragment_add_duration.xml" value="0.21965579710144928" />
       </map>
     </option>
   </component>

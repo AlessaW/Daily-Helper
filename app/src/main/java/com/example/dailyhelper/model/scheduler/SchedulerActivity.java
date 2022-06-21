@@ -27,10 +27,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SchedulerActivity extends AppCompatActivity implements RecyclerViewAdapter.OnItemListener{
 
-    private ListView listView;
     private AppDatabase appDatabase;
     private static final String TAG = "SchedulerActivity";
-    private TextInputEditText duration;
     private List<Task> testList= new ArrayList<Task>();
 
     private RecyclerView recyclerView;
@@ -50,26 +48,6 @@ public class SchedulerActivity extends AppCompatActivity implements RecyclerView
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-
-
-
-
-
-
-//        duration = findViewById(R.id.durationInput);
-//
-//        SimpleScheduler scheduler = new SimpleScheduler(appDatabase);
-//
-//        List<Task> arraylist = scheduler.scheduleTasks(Integer.parseInt(duration.toString()));
-//        Task task = new Task("playing Football", TaskCategory.SPORT, "just a casual Match of Football", 30, 3);
-//        arraylist.add(task);
-//
-//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.activity_list_item, arraylist);
-//        listView.setAdapter(adapter);
-
-//        ArrayList<Task> arrayList = (ArrayList<Task>) scheduler.scheduleTasks(Integer.parseInt(duration.toString()));;
-//        List<Task> arrayList = scheduler.scheduleTasks(Integer.parseInt(duration.toString()));
-
           Bundle d = getIntent().getExtras();
           SimpleScheduler scheduler = new SimpleScheduler(appDatabase);
           appDatabase.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
@@ -83,32 +61,9 @@ public class SchedulerActivity extends AppCompatActivity implements RecyclerView
                                           mAdapter.notifyDataSetChanged();
                                       }
                                   });
-
-
-
-//        ArrayList<Task> list = new ArrayList<>();
-//        Task task = new Task("Remove Sticker", Sport, "Urgent", 25, 1);
-//
-//        list.add(task);
-//        ArrayList<Task> arrayList = new ArrayList<>();
-//
-//        Task task_1 = new Task("Reomve Sticker", "clean up the desk", 1);
-//        Task task_2 = new Task("Romve Sticker", "clean up the desk", 1);
-//        Task task_3 = new Task("Romve Sticker", "clean up the desk", 1);
-
-
-
-
-//        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_item, arrayList);
-//        TaskListAdapter adapter = new TaskListAdapter(this, R.layout.list_item, arrayList);
-//        listView.setAdapter(adapter);
-//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
-//        listView.setAdapter(arrayAdapter);
-
     }
 
     @Override
     public void onItemClick(int position) {
-
     }
 }
