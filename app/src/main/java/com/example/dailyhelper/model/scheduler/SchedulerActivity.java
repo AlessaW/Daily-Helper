@@ -1,6 +1,7 @@
 package com.example.dailyhelper.model.scheduler;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -12,20 +13,28 @@ import android.widget.ListView;
 import com.example.dailyhelper.R;
 import com.example.dailyhelper.controller.taskManager.RecyclerViewAdapter;
 import com.example.dailyhelper.controller.taskManager.TaskListFragment;
-import com.example.dailyhelper.taskManagerDataBase.AppDatabase;
-import com.example.dailyhelper.taskManagerDataBase.Task;
-import com.example.dailyhelper.taskManagerDataBase.TaskCategory;
+import com.example.dailyhelper.model.database.AppDatabase;
+import com.example.dailyhelper.model.taskmanager.Task;
+
+import com.example.dailyhelper.model.taskmanager.TaskCategory;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchedulerActivity extends AppCompatActivity {
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
+public class SchedulerActivity extends AppCompatActivity implements RecyclerViewAdapter.OnItemListener{
 
     private ListView listView;
     private AppDatabase appDatabase;
     private static final String TAG = "SchedulerActivity";
     private TextInputEditText duration;
-    private List<com.example.dailyhelper.taskManagerDataBase.Task> testList= new ArrayList<com.example.dailyhelper.taskManagerDataBase.Task>();
+    private List<Task> testList= new ArrayList<Task>();
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
 
 
     @Override
@@ -35,7 +44,18 @@ public class SchedulerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Log.d(TAG, "onCreate: Started");
 
-        listView = findViewById(R.id.listview);
+        appDatabase = AppDatabase.getDbInstance(getApplicationContext());
+
+        recyclerView = findViewById(R.id.schedulerRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+
+
+
+
+
+
 //        duration = findViewById(R.id.durationInput);
 //
 //        SimpleScheduler scheduler = new SimpleScheduler(appDatabase);
@@ -50,12 +70,21 @@ public class SchedulerActivity extends AppCompatActivity {
 //        ArrayList<Task> arrayList = (ArrayList<Task>) scheduler.scheduleTasks(Integer.parseInt(duration.toString()));;
 //        List<Task> arrayList = scheduler.scheduleTasks(Integer.parseInt(duration.toString()));
 
-        SimpleScheduler scheduler = new SimpleScheduler(appDatabase);
+          Bundle d = getIntent().getExtras();
+          SimpleScheduler scheduler = new SimpleScheduler(appDatabase);
+          appDatabase.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
+                          .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<List<Task>>() {
+                                      @Override
+                                      public void accept(List<Task> tasks) throws Throwable {
+                                          testList= scheduler.scheduleTasks(d.getInt("d"),tasks);
+                                          mAdapter = new RecyclerViewAdapter(testList,getApplicationContext(),SchedulerActivity.this);
+                                          recyclerView.setAdapter(mAdapter);
+                                          mAdapter.notifyDataSetChanged();
+                                      }
+                                  });
 
-        ArrayList<com.example.dailyhelper.model.scheduler.Task> arrayList = new ArrayList<>();
-        com.example.dailyhelper.model.scheduler.Task task_1 = new com.example.dailyhelper.model.scheduler.Task("Remove Sticker", "Clean up the desk", 1);
-        com.example.dailyhelper.model.scheduler.Task task_2 = new com.example.dailyhelper.model.scheduler.Task("Remove Sticker", "Clean up the desk", 1);
-        com.example.dailyhelper.model.scheduler.Task task_3 = new com.example.dailyhelper.model.scheduler.Task("Remove Sticker", "Clean up the desk", 1);
+
 
 //        ArrayList<Task> list = new ArrayList<>();
 //        Task task = new Task("Remove Sticker", Sport, "Urgent", 25, 1);
@@ -66,13 +95,8 @@ public class SchedulerActivity extends AppCompatActivity {
 //        Task task_1 = new Task("Reomve Sticker", "clean up the desk", 1);
 //        Task task_2 = new Task("Romve Sticker", "clean up the desk", 1);
 //        Task task_3 = new Task("Romve Sticker", "clean up the desk", 1);
-//
-        arrayList.add(task_1);
-        arrayList.add(task_2);
-        arrayList.add(task_3);
 
-        TaskListAdapter adapter = new TaskListAdapter(this, R.layout.scheduler_list_item, arrayList);
-        listView.setAdapter(adapter);
+
 
 
 //        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_item, arrayList);
@@ -80,6 +104,11 @@ public class SchedulerActivity extends AppCompatActivity {
 //        listView.setAdapter(adapter);
 //        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
 //        listView.setAdapter(arrayAdapter);
+
+    }
+
+    @Override
+    public void onItemClick(int position) {
 
     }
 }

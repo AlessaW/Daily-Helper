@@ -58,6 +58,7 @@ public class AddFilterActivity extends AppCompatActivity {
 
     public void showResult() {
         Intent intent = new Intent(this, SchedulerActivity.class);
+        intent.putExtra("d",Integer.parseInt(duration.getText().toString()));
         startActivity(intent);
     }
 }

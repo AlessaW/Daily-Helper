@@ -25,42 +25,42 @@ import java.util.stream.Collectors;
 @RunWith(AndroidJUnit4.class)
 public class schedulerTests {
 
-        @Test
-        public void testData(){
-                Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-
-                AppDatabase appDatabase = AppDatabase.getInMemoryDbInstance(appContext);
-
-                appDatabase.TaskDao().insertTask(
-                        new Task("Playing Winx Game", TaskCategory.GAMING, "Having Fun playing", 180, 1),
-                        new Task("Se3 Project", TaskCategory.UNIVERSITY, "Creating Tests", 60, 2),
-                        new Task("Another Task", TaskCategory.FRIENDS, "", 30, 3),
-                        new Task("Task 4", TaskCategory.GROCERY, "", 30, 4)
-                );
-
-                IScheduler scheduler = new SimpleScheduler(appDatabase);
-
-                Task task = appDatabase.TaskDao().getAllTasks().get(0);
-                Log.i("task", task.getName());
-
-                List<Task> list = scheduler.scheduleTasks(120);
-
-                String result = list.stream()
-                        .map(i -> i.getName())
-                        .collect(Collectors.joining(","));
-
-                Log.i("test", result);
-
-                Assert.assertNotNull(list.get(0));
-
-        }
-
-
-
-
-
-
-
-
+//        @Test
+//        public void testData(){
+//                Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+//
+//                AppDatabase appDatabase = AppDatabase.getInMemoryDbInstance(appContext);
+//
+//                appDatabase.TaskDao().insertTask(
+//                        new Task("Playing Winx Game", TaskCategory.GAMING, "Having Fun playing", 180, 1),
+//                        new Task("Se3 Project", TaskCategory.UNIVERSITY, "Creating Tests", 60, 2),
+//                        new Task("Another Task", TaskCategory.FRIENDS, "", 30, 3),
+//                        new Task("Task 4", TaskCategory.GROCERY, "", 30, 4)
+//                );
+//
+//                IScheduler scheduler = new SimpleScheduler(appDatabase);
+//
+//                Task task = appDatabase.TaskDao().getAllTasks().get(0);
+//                Log.i("task", task.getName());
+//
+//                List<Task> list = scheduler.scheduleTasks(120);
+//
+//                String result = list.stream()
+//                        .map(i -> i.getName())
+//                        .collect(Collectors.joining(","));
+//
+//                Log.i("test", result);
+//
+//                Assert.assertNotNull(list.get(0));
+//
+//        }
+//
+//
+//
+//
+//
+//
+//
+//
 
 }

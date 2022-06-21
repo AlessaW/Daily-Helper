@@ -20,7 +20,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  * prio 1 is most important
  */
 
-public class SimpleScheduler implements IScheduler {
+public class SimpleScheduler {
 
     private AppDatabase appDatabase;
     private List<Task> taskList;
@@ -46,6 +46,14 @@ public class SimpleScheduler implements IScheduler {
                     public void accept(List<Task> tasks) throws Throwable {
                         taskList = tasks;
 
+                        probabilityFactor = 1.35;
+                        listTime = 0;
+
+                        for (int i = 0; i < NUMBER_OF_PRIOS; i++) {
+                            prioMatrix.add(createPrioList(i+1));
+                        }
+
+                        Log.d("SimpleScheduler", "SimpleScheduler created");
                         Log.i("Thread Task List"," Processing on Thread " +Thread.currentThread().getName());
                     }
                     public void onError(@NonNull Throwable e) {
@@ -53,14 +61,7 @@ public class SimpleScheduler implements IScheduler {
                     }
                 });
 
-        this.probabilityFactor = 1.35;
-        this.listTime = 0;
 
-        for (int i = 0; i < NUMBER_OF_PRIOS; i++) {
-            prioMatrix.add(createPrioList(i+1));
-        }
-
-        Log.d("SimpleScheduler", "SimpleScheduler created");
     }
 
     /**
@@ -69,25 +70,25 @@ public class SimpleScheduler implements IScheduler {
      * @param time the amount of time we want to schedule tasks for
      * @return a list of tasks in the order in which they are scheduled, if there are no tasks, which fit into the time, the list will be empty
      */
-    @Override
-    public List<Task> scheduleTasks(int time) {
 
-        fillRandoms();
+    public List<Task> scheduleTasks(int time, List<Task> tasks) {
+
+//        fillRandoms();
 
         int randomIndex;
         List<Task> result = new ArrayList<>();
 
         Log.d("SimpleScheduler", "started scheduling");
 
-        while(listTime <= time && randoms.size() != 0){
-            randomIndex = (int) (Math.random()*randoms.size()-1);
-            Task currentTask = randoms.get(randomIndex);
+        while(listTime <= time && tasks.size() != 0){
+            randomIndex = (int) (Math.random()*tasks.size()-1);
+            Task currentTask = tasks.get(randomIndex);
             if(time-listTime >= currentTask.getDuration()){
                 result.add(currentTask);
                 listTime+= currentTask.getDuration();
             }
 
-            removeAllOfObject(randoms, currentTask);
+            removeAllOfObject(tasks, currentTask);
         }
 
         Log.d("SimpleScheduler", "finished scheduling");
