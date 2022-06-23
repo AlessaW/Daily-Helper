@@ -23,6 +23,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     .build();
             Log.i("AppDatabase" ,"Builds and initialize the Database and return an instance" );
         }
+
         return instance;
     }
 

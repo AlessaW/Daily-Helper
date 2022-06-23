@@ -33,7 +33,6 @@ public class TaskManagerActivity extends AppCompatActivity {
                 Log.i("TaskMangerActivity" ,"start the AddTaskFragment" );
             }
         });
-
     }
 
 
