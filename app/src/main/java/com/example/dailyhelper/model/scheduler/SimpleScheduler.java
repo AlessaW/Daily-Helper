@@ -9,11 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.functions.Consumer;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-
 /**
  *
  *
@@ -22,16 +17,16 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SimpleScheduler {
 
-    private AppDatabase appDatabase;
-    private List<Task> taskList;
+    AppDatabase appDatabase;
+    List<Task> taskList;
     //the time the tasks in the taskList take
-    private int listTime;
-    private List<PrioList> prioMatrix = new ArrayList<PrioList>(NUMBER_OF_PRIOS);
+    int listTime;
+    List<PrioList> prioMatrix = new ArrayList<PrioList>(NUMBER_OF_PRIOS);
     List<Task> randoms = new ArrayList<>();
 
-    private double probabilityFactor;
+    double probabilityFactor;
 
-    private static int NUMBER_OF_PRIOS = 4;
+    static int NUMBER_OF_PRIOS = 4;
 
 
 
@@ -39,29 +34,23 @@ public class SimpleScheduler {
     public SimpleScheduler(AppDatabase appDatabase){
         this.appDatabase = appDatabase;
 
-        appDatabase.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Task>>() {
-                    @Override
-                    public void accept(List<Task> tasks) throws Throwable {
-                        taskList = tasks;
+        //will be initialized in scheduleTasks-Method
+        taskList = null;
 
-                        probabilityFactor = 1.35;
-                        listTime = 0;
-
-                        for (int i = 0; i < NUMBER_OF_PRIOS; i++) {
-                            prioMatrix.add(createPrioList(i+1));
-                        }
-
-                        Log.d("SimpleScheduler", "SimpleScheduler created");
-                        Log.i("Thread Task List"," Processing on Thread " +Thread.currentThread().getName());
-                    }
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
+        probabilityFactor = 1.35;
+        listTime = 0;
 
 
+        Log.d("SimpleScheduler", "SimpleScheduler created");
+
+
+    }
+
+
+    void fillPrioMatrix(){
+        for (int i = 0; i < NUMBER_OF_PRIOS; i++) {
+            prioMatrix.add(createPrioList(i+1));
+        }
     }
 
     /**
@@ -73,22 +62,25 @@ public class SimpleScheduler {
 
     public List<Task> scheduleTasks(int time, List<Task> tasks) {
 
-//        fillRandoms();
+
+        taskList = tasks;
+        fillPrioMatrix();
+        fillRandoms();
 
         int randomIndex;
         List<Task> result = new ArrayList<>();
 
         Log.d("SimpleScheduler", "started scheduling");
 
-        while(listTime <= time && tasks.size() != 0){
-            randomIndex = (int) (Math.random()*tasks.size()-1);
-            Task currentTask = tasks.get(randomIndex);
+        while(listTime <= time && randoms.size() != 0){
+            randomIndex = (int) (Math.random()*randoms.size()-1);
+            Task currentTask = randoms.get(randomIndex);
             if(time-listTime >= currentTask.getDuration()){
                 result.add(currentTask);
                 listTime+= currentTask.getDuration();
             }
 
-            removeAllOfObject(tasks, currentTask);
+            removeAllOfObject(randoms, currentTask);
         }
 
         Log.d("SimpleScheduler", "finished scheduling");
@@ -96,7 +88,7 @@ public class SimpleScheduler {
 
     }
 
-    private void removeAllOfObject(List list, Object o){
+    void removeAllOfObject(List list, Object o){
         boolean notAll = true;
         while (notAll){
             notAll = list.remove(o);
@@ -104,41 +96,36 @@ public class SimpleScheduler {
     }
 
 
-    private PrioList createPrioList(int prio){
+    PrioList createPrioList(int prio){
         return new PrioList(taskList.stream().filter(t -> t.getPriority() == prio).collect(Collectors.toList()),
                 prio, 0);
     }
 
-    private boolean isTooSmall(int length,int compareLength){
+    boolean isTooSmall(int length,int compareLength){
         return length <= Math.round(compareLength*probabilityFactor);
     }
 
 
     /**
-     * sets compareLength to length of lower prio list if compareLength is zero
+     * sets compareLength to length of list with less important (higher number) prio if compareLength is zero
      * @param prio
      * @param compareLength length of List with prio+1
-     * @return
+     * @return adjusted compareLength
      */
-    private int setCompareLength(int prio, int compareLength){
-        int result;
-        if(compareLength == 0){
-            switch (prio){
+    int setCompareLength(int prio, int compareLength){
 
-                case 2: result = prioMatrix.get(3).getLengthInRandomsList();
-                    result = setCompareLength(prio+1, result);
-                case 1: result = prioMatrix.get(2).getLengthInRandomsList();
-                    result = setCompareLength(prio+1, result);
-                default: result = 0;
-
-            }
-            return result;
-        }else {
-            return compareLength;
+        while (compareLength == 0 && prio <= NUMBER_OF_PRIOS){
+            compareLength = prioMatrix.get(prio).getLengthInRandomsList();
+            prio++;
         }
+        return compareLength;
     }
 
-    private void addIfTooSmall(int prio){
+    /**
+     * adds more Tasks of the given Priority to the randoms-List if the probability is too small
+     * @param prio
+     */
+    void addIfTooSmall(int prio){
         int compareLength = prioMatrix.get(prio).lengthInRandomsList;
         compareLength = setCompareLength(prio, compareLength);
 
@@ -160,7 +147,11 @@ public class SimpleScheduler {
         prioMatrix.get(prio-1).setLengthInRandomsList(prioLength);
     }
 
-    private void fillRandoms(){
+
+    /**
+     * puts all Tasks into the randoms List in varying quantity according to the probability which they are to be scheduled with, this probability depends on the priority
+     */
+    void fillRandoms(){
         for (int i = 0; i < NUMBER_OF_PRIOS; i++) {
             randoms.addAll(prioMatrix.get(i).prioList);
             prioMatrix.get(i).setLengthInRandomsList(prioMatrix.get(i).getPrioList().size());
