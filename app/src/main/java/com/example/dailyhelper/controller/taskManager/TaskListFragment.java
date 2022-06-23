@@ -100,13 +100,9 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
+            db = AppDatabase.getDbInstance(view.getContext());
 
-
-
-
-      db = AppDatabase.getDbInstance(view.getContext());
-
-         db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
+            db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
                  .observeOn(AndroidSchedulers.mainThread())
                  .subscribe(new Consumer<List<Task>>() {
 
@@ -117,6 +113,8 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
                         recyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
 
+                         Log.i("TaskListFragment" ,"initialize the RecyclerViewAdapter and setting it as the adapter for the RecyclerView" +
+                                 " using the List from the DataBase" );
                         Log.i("Thread Task List"," Processing on Thread " +Thread.currentThread().getName());
                      }
                      public void onError(@NonNull Throwable e) {
@@ -124,12 +122,9 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
                      }
 
                  });
-
-
         return view;
-
-
     }
+
 //    public void fillTestList(){
 //        db =  AppDatabase.getDbInstance(getContext());
 //        if (db.TaskDao().getAllTasks().isEmpty() ) {
@@ -142,6 +137,7 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
 
     @Override
     public void onItemClick(int position) {
+
 
         int id = testList.get(position).getId();
 
@@ -161,6 +157,8 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
                 .getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
         fragmentTransaction.commit();
-    }
 
+        Log.i("TaskListFragment" ,"When an Item is Clicked passes the Id of the Task " +
+                "that was Clicked on in a Bundle and then changes to the EditTaskFragment");
+    }
 }

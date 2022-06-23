@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,7 +111,7 @@ public class AddTaskFragment extends Fragment {
 
                             @Override
                             public void onComplete() {
-
+                                Log.i("AddTaskFragment" , "added the Task to the Database with the Values from the EditText Elements");
                             }
 
                             @Override
@@ -134,6 +135,7 @@ public class AddTaskFragment extends Fragment {
                         .getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentContainerView, new TaskListFragment());
                 fragmentTransaction.commit();
+                Log.i("AddTaskFragment" , "goes back to the TaskListFragment without adding the Task");
             }
         });
 

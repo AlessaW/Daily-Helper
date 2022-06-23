@@ -1,6 +1,7 @@
 package com.example.dailyhelper.model.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.Database;
 import androidx.room.Room;
@@ -20,6 +21,7 @@ public abstract class AppDatabase extends RoomDatabase {
             instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class,"Database")
                     .allowMainThreadQueries()
                     .build();
+            Log.i("AppDatabase" ,"Builds and initialize the Database and return an instance" );
         }
         return instance;
     }

@@ -124,6 +124,7 @@ public class EditTaskFragment extends Fragment {
                                  }
                              }
                          }
+
                          Log.i("yes", task.getName());
 
                          editTaskName.setText(task.getName());
@@ -161,6 +162,7 @@ public class EditTaskFragment extends Fragment {
                             @Override
                             public void onComplete() {
                                 Log.i("Thread Item Delete"," Processing on Thread " +Thread.currentThread().getName());
+                                Log.i("EditTaskFragment" ,"Delete the Selected Task from the Database using the id");
                             }
 
                             @Override
@@ -194,6 +196,8 @@ public class EditTaskFragment extends Fragment {
                            @Override
                            public void onComplete() {
                                Log.i("Thread Edit Item"," Processing on Thread " +Thread.currentThread().getName());
+                               Log.i("EditTaskFragment" ,"Change the Values of the variables of the Selected Task using the Values" +
+                                       " from the Edit Task Elements using the id");
                            }
 
                            @Override
@@ -216,6 +220,7 @@ public class EditTaskFragment extends Fragment {
                         .getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentContainerView, new TaskListFragment());
                 fragmentTransaction.commit();
+                Log.i("EditTaskFragment" ,"goes back to the TaskListFragment without Editing the Task");
             }
         });
 
