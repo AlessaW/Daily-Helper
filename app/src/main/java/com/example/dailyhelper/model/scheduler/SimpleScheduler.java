@@ -114,9 +114,10 @@ public class SimpleScheduler {
      */
     int setCompareLength(int prio, int compareLength){
 
-        while (compareLength == 0 && prio <= NUMBER_OF_PRIOS){
-            compareLength = prioMatrix.get(prio).getLengthInRandomsList();
-            prio++;
+        int offset=1;
+        while (compareLength == 0 && prio+offset <= NUMBER_OF_PRIOS){
+            compareLength = prioMatrix.get(prio+ offset-1).getLengthInRandomsList();
+            offset++;
         }
         return compareLength;
     }

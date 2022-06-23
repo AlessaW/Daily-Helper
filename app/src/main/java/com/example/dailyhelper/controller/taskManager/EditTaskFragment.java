@@ -133,7 +133,7 @@ public class EditTaskFragment extends Fragment {
                          editTaskDescription.setText(task.getDescription());
                      }
 
-                     public void onError( Throwable e) {
+                     public void onError(Throwable e) {
 
                      }
                  });

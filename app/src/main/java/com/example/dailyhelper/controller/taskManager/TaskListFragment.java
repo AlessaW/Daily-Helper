@@ -44,7 +44,6 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerViewAdapter cAdapter;
 
      AppDatabase db;
     List<Task> testList= new ArrayList<Task>();
@@ -121,9 +120,8 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
 
         testList.size();
         return view;
-
-
     }
+
     public void fillTestList(){
         db =  AppDatabase.getDbInstance(getContext());
         db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
