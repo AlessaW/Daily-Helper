@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 ## [unreleased]
+## [1.0.1] - 2022-19-06
+###Added
+- Scheduler
+
 ## [1.0.0] - 2022-17-05
 ### Added
 - DataBase Connection via SQLite
