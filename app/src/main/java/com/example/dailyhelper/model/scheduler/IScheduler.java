@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IScheduler {
 
-    List<Task> scheduleTasks(int time);
+    List<Task> scheduleTasks(int time, List<Task> tasks);
 }

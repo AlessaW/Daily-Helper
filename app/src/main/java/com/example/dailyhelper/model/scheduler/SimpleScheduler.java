@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * prio 1 is most important
  */
 
-public class SimpleScheduler {
+public class SimpleScheduler implements IScheduler {
 
     AppDatabase appDatabase;
     List<Task> taskList;
