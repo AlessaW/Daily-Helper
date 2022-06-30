@@ -10,12 +10,9 @@ import com.example.dailyhelper.model.taskmanager.Task;
 import com.example.dailyhelper.model.taskmanager.TaskCategory;
 
 import java.util.List;
-import java.util.Observable;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.core.Maybe;
-import io.reactivex.rxjava3.core.Single;
 
 @Dao
 public interface TaskDao {

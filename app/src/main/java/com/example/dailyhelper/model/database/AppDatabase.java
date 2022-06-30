@@ -27,4 +27,12 @@ public abstract class AppDatabase extends RoomDatabase {
         return instance;
     }
 
+    public static AppDatabase getInMemoryDbInstance(Context context){
+        if (instance ==null){
+            instance = Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class)
+                    .build();
+        }
+        return instance;
+    }
+
 }

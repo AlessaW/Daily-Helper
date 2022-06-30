@@ -1,33 +1,27 @@
 package com.example.dailyhelper.controller.taskManager;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.dailyhelper.R;
 import com.example.dailyhelper.model.database.AppDatabase;
 import com.example.dailyhelper.model.taskmanager.Task;
 import com.example.dailyhelper.model.taskmanager.TaskCategory;
-
-
-import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.FlowableSubscriber;
-import io.reactivex.rxjava3.core.MaybeObserver;
-import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -50,7 +44,6 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerViewAdapter cAdapter;
 
      AppDatabase db;
     List<Task> testList= new ArrayList<Task>();
@@ -95,14 +88,18 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
         View view= inflater.inflate(R.layout.fragment_task_list, container, false);
 
 
-//        fillTestList();
+        fillTestList();
         recyclerView = view.findViewById(R.id.ListRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-            db = AppDatabase.getDbInstance(view.getContext());
 
-            db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
+
+
+
+      db = AppDatabase.getDbInstance(view.getContext());
+
+         db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
                  .observeOn(AndroidSchedulers.mainThread())
                  .subscribe(new Consumer<List<Task>>() {
 
@@ -113,8 +110,6 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
                         recyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
 
-                         Log.i("TaskListFragment" ,"initialize the RecyclerViewAdapter and setting it as the adapter for the RecyclerView" +
-                                 " using the List from the DataBase" );
                         Log.i("Thread Task List"," Processing on Thread " +Thread.currentThread().getName());
                      }
                      public void onError(@NonNull Throwable e) {
@@ -122,22 +117,66 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
                      }
 
                  });
+
+        testList.size();
         return view;
     }
 
-//    public void fillTestList(){
-//        db =  AppDatabase.getDbInstance(getContext());
-//        if (db.TaskDao().getAllTasks().isEmpty() ) {
-//            db.TaskDao().insertTask(new Task("playing Football", TaskCategory.SPORT, "just a casual Match of Football", 30, 3));
-//            db.TaskDao().insertTask(new Task("Reading A book", TaskCategory.UNIVERSITY, "read any book for at least 1 hour ", 1, 2));
-//
-//        }
-//
-//    }
+    public void fillTestList(){
+        db =  AppDatabase.getDbInstance(getContext());
+        db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Task>>() {
+                    @Override
+                    public void accept(List<Task> tasks) throws Throwable {
+                        if (tasks.isEmpty()) {
+
+                            db.TaskDao().insertTask(new Task("playing Football", TaskCategory.SPORT, "just a casual Match of Football", 30, 3))
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe(new CompletableObserver() {
+                                        @Override
+                                        public void onSubscribe(@NonNull Disposable d) {
+
+                                        }
+
+                                        @Override
+                                        public void onComplete() {
+
+                                        }
+
+                                        @Override
+                                        public void onError(@NonNull Throwable e) {
+
+                                        }
+                                    });
+                            db.TaskDao().insertTask(new Task("Reading A book", TaskCategory.UNIVERSITY, "read any book for at least 1 hour ", 25, 2))
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe(new CompletableObserver() {
+                                        @Override
+                                        public void onSubscribe(@NonNull Disposable d) {
+
+                                        }
+
+                                        @Override
+                                        public void onComplete() {
+
+                                        }
+
+                                        @Override
+                                        public void onError(@NonNull Throwable e) {
+
+                                        }
+                                    });
+
+                        }
+                    }
+                });
+
+
+    }
 
     @Override
     public void onItemClick(int position) {
-
 
         int id = testList.get(position).getId();
 
@@ -157,8 +196,6 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
                 .getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
         fragmentTransaction.commit();
-
-        Log.i("TaskListFragment" ,"When an Item is Clicked passes the Id of the Task " +
-                "that was Clicked on in a Bundle and then changes to the EditTaskFragment");
     }
+
 }
