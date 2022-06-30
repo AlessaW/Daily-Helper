@@ -29,8 +29,10 @@ public class Task {
         this.description = description;
         this.duration = duration;
 
-        if (priority >=1 && priority <=5 ){
+        if (priority >=1 && priority <5 ){
             this.priority = priority;
+        } else {
+            this.priority = 1;
         }
     }
 
