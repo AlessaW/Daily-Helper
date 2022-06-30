@@ -41,17 +41,23 @@
 Die Prinzipien wurden in den folgenden Klassen umgesetzt:
 #### Single Responsibility
 - Task
+- Scheduler
+- TaskDao
+- EditTaskFragment
+- AddTaskFragment
+- TaskManagerActivity
 
 #### Open/Close-Prinzip
-- Scheduler???
+- Scheduler mit den Factories
 
 #### Liskovsches Substitutionsprinzip
-- Scheduler???
+- RecyclerViewAdapter erweitert
+
 #### Interface-Segregation-Prinzip
-- nachschauen
+- Scheduler: haben nur die Methoden, die sie brauchen
 
 #### Dependency-Inversion-Prinzip
-- eeeeehm
+- Scheduler und SchedulerFactory mit Scheduler-Interface um es erweiterbar zu halten und weitere Scheduler hinzufügen zu können
 
 # Git Vorgehen
 - Git-Flow mit Main, Develop-Branch mit Featurebranches, Production-Branch
