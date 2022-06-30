@@ -55,14 +55,14 @@ public class AdvancedScheduler extends SimpleScheduler {
             filterByCategory(taskCategory);
         }
 
-        if (priority <=SimpleScheduler.NUMBER_OF_PRIOS && priority>=0){
+        if (priority <=SimpleScheduler.NUMBER_OF_PRIOS && priority>0){
             filterByPriority(priority);
         }
 
-        super.scheduleTasks(time, taskList);
+         List<Task> result = super.scheduleTasks(time, taskList);
 
-        taskList = sortByLength(taskList, sortedAs);
-        return taskList;
+        result = sortByLength(result, sortedAs);
+        return result;
     }
 }
 
