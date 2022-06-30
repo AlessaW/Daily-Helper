@@ -20,7 +20,6 @@ import io.reactivex.rxjava3.core.Single;
 @Dao
 public interface TaskDao {
 
-
     @Query("SELECT * FROM task")
     Flowable<List<Task>> getAllTasks();
 

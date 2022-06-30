@@ -111,7 +111,7 @@ public class EditTaskFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                  .subscribe(new Consumer<List<Task>>() {
                      @Override
-                     public void accept(List<Task> tasks) throws Throwable {
+                     public void accept(List<Task> tasks){
                          testList= tasks;
                          Log.i("Thread Edit list"," Processing on Thread " +Thread.currentThread().getName());
                          Log.i("is list Empty ?","Size is " + testList.size());

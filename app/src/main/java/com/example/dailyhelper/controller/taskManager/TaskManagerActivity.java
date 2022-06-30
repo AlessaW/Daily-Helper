@@ -21,7 +21,7 @@ public class TaskManagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_manager);
 
-        addTaskButton = findViewById(R.id.AddTask);
+        addTaskButton = findViewById(R.id.addTask);
 
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override

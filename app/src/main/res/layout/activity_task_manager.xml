@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/ShowTasks"
+            android:id="@+id/showTasks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -24,7 +24,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/AddTask"
+            android:id="@+id/addTask"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
