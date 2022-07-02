@@ -13,26 +13,26 @@ On Scheduler of <strong>Daily Helper</strong> you can list up which task you can
 
 ## Specific Description of Features
 
-##### Task Manager
-##### 1. Adding new task
+### Task Manager
+#### 1. Adding new task
 : If you click 'New Task', then you can see <strong>add task screen</strong>. There are 5 fields you can put the information in: <strong>Name, Category, Duration, Priority, Description</strong>.
 
 ![add_task_screenshot](/app/src/main/res/drawable/add_task_screenshot.png)
 
-##### 2. Task List
+#### 2. Task List
 : All added tasks are listed up. The list shows task by added time order.
 
 ![task_list_screenshot](/app/src/main/res/drawable/task_list_screenshot.png)
 
-##### 3. Edit Task
+#### 3. Edit Task
 : Added tasks can be edited when you click each task.
 
-##### 4. Search Task by Duration
+#### 4. Search Task by Duration
 : Type specific duration you can spend now. You can type in only numbers.
 
 ![add_duration](/app/src/main/res/drawable/add_duration_screenshot.png)
 
-##### 5. List by duration
+#### 5. List by duration
 : According to specific duration which you typed in, daily helper will show possible tasks you can do now.
 
 ![task_list_by_duration_screenshot](/app/src/main/res/drawable/task_list_by_duration_screenshot.png)
