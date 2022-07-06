@@ -34,6 +34,7 @@ public class Task {
         } else {
             this.priority = 1;
         }
+
     }
 
     @Ignore
