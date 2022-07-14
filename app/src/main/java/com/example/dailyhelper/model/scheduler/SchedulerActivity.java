@@ -1,28 +1,21 @@
 package com.example.dailyhelper.model.scheduler;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import com.example.dailyhelper.R;
 import com.example.dailyhelper.controller.taskManager.RecyclerViewAdapter;
-import com.example.dailyhelper.controller.taskManager.TaskListFragment;
 import com.example.dailyhelper.model.database.AppDatabase;
 import com.example.dailyhelper.model.taskmanager.Task;
 
-import com.example.dailyhelper.model.taskmanager.TaskCategory;
-import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -51,7 +44,7 @@ public class SchedulerActivity extends AppCompatActivity implements RecyclerView
 
         Bundle d = getIntent().getExtras();
 
-          SimpleScheduler scheduler = new SimpleScheduler(appDatabase);
+          IScheduler scheduler = SchedulerFactory.createScheduler(null, 0 ,0);
           appDatabase.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
                   .observeOn(AndroidSchedulers.mainThread())
                   .subscribe(new Consumer<List<Task>>() {

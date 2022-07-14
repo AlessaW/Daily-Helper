@@ -2,7 +2,6 @@ package com.example.dailyhelper.model.scheduler;
 
 import android.util.Log;
 
-import com.example.dailyhelper.model.database.AppDatabase;
 import com.example.dailyhelper.model.taskmanager.Task;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class SimpleScheduler implements IScheduler {
 
-    AppDatabase appDatabase;
+
     List<Task> taskList;
     //the time the tasks in the taskList take
     int listTime;
@@ -31,8 +30,7 @@ public class SimpleScheduler implements IScheduler {
 
 
 
-    public SimpleScheduler(AppDatabase appDatabase){
-        this.appDatabase = appDatabase;
+    public SimpleScheduler(){
 
         //will be initialized in scheduleTasks-Method
         taskList = null;
