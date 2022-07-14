@@ -47,8 +47,8 @@ public class AddTaskFragment extends Fragment {
     private EditText addTaskName;
     private AutoCompleteTextView addTaskCategory;
     private AutoCompleteTextView addTaskDuration;
-    private ArrayAdapter<String> adapterItemsForDuration;
     private AutoCompleteTextView addTaskPriority;
+    private ArrayAdapter<String> adapterItemsForDuration;
     private ArrayAdapter<String> adapterItemsForPriority;
     private ArrayAdapter<String> adapterItemsForCategory;
     private int duration;
@@ -122,7 +122,7 @@ public class AddTaskFragment extends Fragment {
             }
         });
 
-        addTaskPriority.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        addTaskDuration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
@@ -130,7 +130,7 @@ public class AddTaskFragment extends Fragment {
             }
         });
 
-        addTaskDuration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        addTaskPriority.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();

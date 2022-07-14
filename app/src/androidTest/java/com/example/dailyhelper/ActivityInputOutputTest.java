@@ -47,7 +47,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 @RunWith(AndroidJUnit4.class)
 public class ActivityInputOutputTest {
 
-    public ActivityScenarioRule mActivityRule = new ActivityScenarioRule<>(
+    @Rule
+     public ActivityScenarioRule mActivityRule = new ActivityScenarioRule<>(
             TaskManagerActivity.class);
 
     AppDatabase db;
