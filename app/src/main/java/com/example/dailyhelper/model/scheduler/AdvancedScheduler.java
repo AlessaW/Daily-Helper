@@ -1,6 +1,5 @@
 package com.example.dailyhelper.model.scheduler;
 
-import com.example.dailyhelper.model.database.AppDatabase;
 import com.example.dailyhelper.model.taskmanager.Task;
 import com.example.dailyhelper.model.taskmanager.TaskCategory;
 
@@ -18,8 +17,8 @@ public class AdvancedScheduler extends SimpleScheduler {
     int sortedAs;
 
 
-    public AdvancedScheduler(AppDatabase appDatabase, TaskCategory taskCategory, int priority, int sortedAs) {
-        super(appDatabase);
+    public AdvancedScheduler(TaskCategory taskCategory, int priority, int sortedAs) {
+        super();
         this.taskCategory = taskCategory;
         this.priority = priority;
         this.sortedAs = sortedAs;

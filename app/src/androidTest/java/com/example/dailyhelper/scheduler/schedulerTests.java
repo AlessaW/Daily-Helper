@@ -1,12 +1,9 @@
 package com.example.dailyhelper.scheduler;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.dailyhelper.model.database.AppDatabase;
 import com.example.dailyhelper.model.scheduler.IScheduler;
 import com.example.dailyhelper.model.scheduler.SchedulerFactory;
 import com.example.dailyhelper.model.taskmanager.Task;
@@ -26,10 +23,6 @@ public class schedulerTests {
     @Test
     public void testSimpleScheduler(){
 
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-
-        AppDatabase appDatabase = AppDatabase.getInMemoryDbInstance(appContext);
-
 
         List<Task> list = new ArrayList<Task>();
         list.add(new Task("Playing Winx Game", TaskCategory.GAMING, "Having Fun playing", 180, 1));
@@ -38,7 +31,7 @@ public class schedulerTests {
         list.add(new Task("Task 4", TaskCategory.GROCERY, "", 30, 4));
 
 
-        IScheduler scheduler = SchedulerFactory.createScheduler(appDatabase, null, 0, 0);
+        IScheduler scheduler = SchedulerFactory.createScheduler(null, 0, 0);
 
 
         List<Task> resultList = scheduler.scheduleTasks(120, list);
@@ -63,9 +56,7 @@ public class schedulerTests {
     @Test
     public void testAdvancedScheduler(){
 
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        AppDatabase appDatabase = AppDatabase.getInMemoryDbInstance(appContext);
 
 
         List<Task> list = new ArrayList<Task>();
@@ -75,9 +66,9 @@ public class schedulerTests {
         list.add(new Task("Task 4", TaskCategory.GROCERY, "", 30, 4));
 
 
-        IScheduler scheduler = SchedulerFactory.createScheduler(appDatabase, TaskCategory.FRIENDS, 0, 0);
-        IScheduler scheduler2 = SchedulerFactory.createScheduler(appDatabase, null, 4, 0);
-        IScheduler scheduler3 = SchedulerFactory.createScheduler(appDatabase, null, 0, 2);
+        IScheduler scheduler = SchedulerFactory.createScheduler(TaskCategory.FRIENDS, 0, 0);
+        IScheduler scheduler2 = SchedulerFactory.createScheduler(null, 4, 0);
+        IScheduler scheduler3 = SchedulerFactory.createScheduler(null, 0, 2);
 
 
         List<Task> resultList = scheduler.scheduleTasks(120, list);
