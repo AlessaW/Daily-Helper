@@ -44,7 +44,7 @@ public class SchedulerActivity extends AppCompatActivity implements RecyclerView
 
         Bundle d = getIntent().getExtras();
 
-          IScheduler scheduler = SchedulerFactory.createScheduler(appDatabase, null, 0 ,0);
+          IScheduler scheduler = SchedulerFactory.createScheduler(null, 0 ,0);
           appDatabase.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
                   .observeOn(AndroidSchedulers.mainThread())
                   .subscribe(new Consumer<List<Task>>() {
