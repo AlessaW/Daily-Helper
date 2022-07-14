@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -36,12 +39,22 @@ public class AddTaskFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    private String[] itemsForDuration={"10","20","30","60","90","120","180"};
+    private String[] itemsForPriority={"1","2","3","4"};
+    private String[] itemsForCategory;
     private String mParam1;
     private String mParam2;
     private EditText addTaskName;
-    private EditText addTaskCategory;
-    private EditText addTaskDuration;
-    private EditText addTaskPriority;
+    private AutoCompleteTextView addTaskCategory;
+    private AutoCompleteTextView addTaskDuration;
+    private ArrayAdapter<String> adapterItemsForDuration;
+    private AutoCompleteTextView addTaskPriority;
+    private ArrayAdapter<String> adapterItemsForPriority;
+    private ArrayAdapter<String> adapterItemsForCategory;
+    private int duration;
+    private int Priority;
+    private String category;
+
     private EditText addTaskDescription;
     private Button addItemButton;
     private Button addTaskCancelButton;
@@ -84,9 +97,47 @@ public class AddTaskFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_task, container, false);
         addTaskName = view.findViewById(R.id.addTaskName);
-        addTaskCategory = view.findViewById(R.id.addTaskCategory);
-        addTaskDuration = view.findViewById(R.id.addTaskDuration);
-        addTaskPriority = view.findViewById(R.id.addTaskPriority);
+        addTaskCategory = view.findViewById(R.id.autoCompleteCategory);
+
+        addTaskDuration = view.findViewById(R.id.autoCompleteDuration);
+        addTaskPriority = view.findViewById(R.id.autoCompletePriority);
+
+        itemsForCategory= TaskCategory.getNames(TaskCategory.class);
+
+        adapterItemsForCategory = new ArrayAdapter<>(getContext(), R.layout.drop_down_item, itemsForCategory);
+
+        adapterItemsForPriority = new ArrayAdapter<>(getContext(), R.layout.drop_down_item,itemsForPriority);
+
+        adapterItemsForDuration = new ArrayAdapter<String>(getContext(), R.layout.drop_down_item, itemsForDuration);
+
+        addTaskDuration.setAdapter(adapterItemsForDuration);
+        addTaskPriority.setAdapter(adapterItemsForPriority);
+        addTaskCategory.setAdapter(adapterItemsForCategory);
+
+        addTaskCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                category= item;
+            }
+        });
+
+        addTaskPriority.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                duration= Integer.parseInt(item);
+            }
+        });
+
+        addTaskDuration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                Priority= Integer.parseInt(item);
+            }
+        });
+
         addTaskDescription = view.findViewById(R.id.addTaskDescription);
         addItemButton = view.findViewById(R.id.addTaskButton);
         addTaskCancelButton = view.findViewById(R.id.addTaskCancelButton);
@@ -98,10 +149,10 @@ public class AddTaskFragment extends Fragment {
             public void onClick(View view) {
                 db.TaskDao().insertTask(new Task(
                         addTaskName.getText().toString(),
-                        TaskCategory.valueOf(addTaskCategory.getText().toString()),
+                                TaskCategory.valueOf(category),
                         addTaskDescription.getText().toString(),
-                        Integer.parseInt(addTaskDuration.getText().toString()),
-                        Integer.parseInt(addTaskPriority.getText().toString())
+                        duration,
+                                Priority
                 )).subscribeOn(Schedulers.computation())
                         .subscribe(new CompletableObserver() {
                             @Override

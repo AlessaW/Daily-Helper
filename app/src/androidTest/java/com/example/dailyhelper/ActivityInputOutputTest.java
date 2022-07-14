@@ -46,7 +46,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  */
 @RunWith(AndroidJUnit4.class)
 public class ActivityInputOutputTest {
-    @Rule
+
     public ActivityScenarioRule mActivityRule = new ActivityScenarioRule<>(
             TaskManagerActivity.class);
 

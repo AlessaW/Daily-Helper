@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/addTaskDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,9 +34,18 @@
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addTaskCategory"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:hint="@string/select"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
 
-        <EditText
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/addTaskPriority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +56,16 @@
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addTaskDuration"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:hint="@string/select"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompletePriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
             android:id="@+id/addTaskDescription"
@@ -62,7 +80,7 @@
             app:layout_constraintTop_toBottomOf="@+id/addTaskDescriptionTextView"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/addTaskCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,7 +91,16 @@
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addTaskName"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:hint="@string/select"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/addTaskNameTextView"
@@ -161,5 +188,7 @@
             app:layout_constraintHorizontal_bias="0.422"
             app:layout_constraintStart_toEndOf="@+id/addTaskButton"
             app:layout_constraintTop_toBottomOf="@+id/addTaskDescription" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

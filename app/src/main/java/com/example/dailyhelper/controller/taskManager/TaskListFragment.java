@@ -77,8 +77,6 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
@@ -88,13 +86,10 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
         View view= inflater.inflate(R.layout.fragment_task_list, container, false);
 
 
-        fillTestList();
+//        fillTestList();
         recyclerView = view.findViewById(R.id.ListRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-
-
 
 
       db = AppDatabase.getDbInstance(view.getContext());
@@ -122,58 +117,58 @@ public class TaskListFragment extends Fragment implements RecyclerViewAdapter.On
         return view;
     }
 
-    public void fillTestList(){
-        db =  AppDatabase.getDbInstance(getContext());
-        db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Task>>() {
-                    @Override
-                    public void accept(List<Task> tasks) throws Throwable {
-                        if (tasks.isEmpty()) {
-
-                            db.TaskDao().insertTask(new Task("playing Football", TaskCategory.SPORT, "just a casual Match of Football", 30, 3))
-                                    .subscribeOn(Schedulers.io())
-                                    .subscribe(new CompletableObserver() {
-                                        @Override
-                                        public void onSubscribe(@NonNull Disposable d) {
-
-                                        }
-
-                                        @Override
-                                        public void onComplete() {
-
-                                        }
-
-                                        @Override
-                                        public void onError(@NonNull Throwable e) {
-
-                                        }
-                                    });
-                            db.TaskDao().insertTask(new Task("Reading A book", TaskCategory.UNIVERSITY, "read any book for at least 1 hour ", 25, 2))
-                                    .subscribeOn(Schedulers.io())
-                                    .subscribe(new CompletableObserver() {
-                                        @Override
-                                        public void onSubscribe(@NonNull Disposable d) {
-
-                                        }
-
-                                        @Override
-                                        public void onComplete() {
-
-                                        }
-
-                                        @Override
-                                        public void onError(@NonNull Throwable e) {
-
-                                        }
-                                    });
-
-                        }
-                    }
-                });
-
-
-    }
+//    public void fillTestList(){
+//        db =  AppDatabase.getDbInstance(getContext());
+//        db.TaskDao().getAllTasks().subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<List<Task>>() {
+//                    @Override
+//                    public void accept(List<Task> tasks) throws Throwable {
+//
+//                        if (tasks.isEmpty()) {
+//
+//                            db.TaskDao().insertTask(new Task("playing Football", TaskCategory.SPORT, "just a casual Match of Football", 30, 3))
+//                                    .subscribeOn(Schedulers.io())
+//                                    .subscribe(new CompletableObserver() {
+//                                        @Override
+//                                        public void onSubscribe(@NonNull Disposable d) {
+//
+//                                        }
+//
+//                                        @Override
+//                                        public void onComplete() {
+//
+//                                        }
+//
+//                                        @Override
+//                                        public void onError(@NonNull Throwable e) {
+//
+//                                        }
+//                                    });
+//
+//                            db.TaskDao().insertTask(new Task("Reading A book", TaskCategory.UNIVERSITY, "read any book for at least 1 hour ", 25, 2))
+//                                    .subscribeOn(Schedulers.io())
+//                                    .subscribe(new CompletableObserver() {
+//                                        @Override
+//                                        public void onSubscribe(@NonNull Disposable d) {
+//
+//                                        }
+//
+//                                        @Override
+//                                        public void onComplete() {
+//
+//                                        }
+//
+//                                        @Override
+//                                        public void onError(@NonNull Throwable e) {
+//
+//                                        }
+//                                    });
+//                        }
+//                    }
+//                });
+//
+//    }
 
     @Override
     public void onItemClick(int position) {

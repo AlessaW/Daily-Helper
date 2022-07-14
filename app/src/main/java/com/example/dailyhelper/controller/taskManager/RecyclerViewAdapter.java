@@ -18,12 +18,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     List<Task> tasksList;
     Context context;
-    private OnItemListener mOnItemListener;
+    private final OnItemListener mOnItemListener;
 
-    public RecyclerViewAdapter(List<Task> tasksList, Context context,OnItemListener onItemListener) {
+    public RecyclerViewAdapter(List<Task> tasksList, Context context, OnItemListener onItemListener) {
         this.tasksList = tasksList;
         this.context = context;
-        this.mOnItemListener=onItemListener;
+        this.mOnItemListener = onItemListener;
     }
 
     @NonNull
@@ -31,14 +31,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_list_recyclerview, parent, false);
-        MyViewHolder holder = new MyViewHolder(view,mOnItemListener);
+        MyViewHolder holder = new MyViewHolder(view, mOnItemListener);
 
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
 
         holder.Name.setText(tasksList.get(position).getName());
         holder.Category.setText(String.valueOf(tasksList.get(position).getCategory()));
@@ -64,7 +63,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         OnItemListener onItemListener;
 
 
-        public MyViewHolder(@NonNull View itemView,OnItemListener onItemListener) {
+        public MyViewHolder(@NonNull View itemView, OnItemListener onItemListener) {
             super(itemView);
             Name = itemView.findViewById(R.id.taskListName);
             Category = itemView.findViewById(R.id.taskListCategory);
@@ -72,20 +71,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             Priority = itemView.findViewById(R.id.taskListPriority);
             Description = itemView.findViewById(R.id.taskListDescription);
 
-
-
             this.onItemListener = onItemListener;
             itemView.setOnClickListener(this);
         }
-
 
         @Override
         public void onClick(View view) {
             onItemListener.onItemClick(getAdapterPosition());
         }
-    }
+        }
 
-    public interface OnItemListener{
-        void onItemClick(int position);
-    }
+        public interface OnItemListener {
+            void onItemClick(int position);
+        }
 }
