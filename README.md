@@ -1,4 +1,13 @@
 # Daily helper
+## How to run this App?
+
+#### 1. Open Android Studio
+#### 2. Check if the 'app' is set on run configuration
+#### 3. Run app!
+
+Now you can see successfully running App and our first main menu!
+Enjoy <strong>Daily Helper</strong>!
+
 ### Make your day easy!
 Daily Helper helps you to create task list and manage them easily!
 You can basically add, delete and edit your tasks.
@@ -13,6 +22,11 @@ On Scheduler of <strong>Daily Helper</strong> you can list up which task you can
 
 ## Specific Description of Features
 
+### Main menu
+
+#### Select what you want to do first!
+![main_menu_screenshot](/app/src/main/res/drawable/main_menu_screenshot.png)
+
 ### Task Manager
 #### 1. Adding new task
 : If you click 'New Task', then you can see <strong>add task screen</strong>. There are 5 fields you can put the information in: <strong>Name, Category, Duration, Priority, Description</strong>.
@@ -26,13 +40,15 @@ On Scheduler of <strong>Daily Helper</strong> you can list up which task you can
 
 #### 3. Edit Task
 : Added tasks can be edited when you click each task.
+![edit_task_screenshot](/app/src/main/res/drawable/edit_task_screenshot.png)
 
-#### 4. Search Task by Duration
+### Scheduler
+#### 1. Search Task by Duration
 : Type specific duration you can spend now. You can type in only numbers.
 
 ![add_duration](/app/src/main/res/drawable/add_duration_screenshot.png)
 
-#### 5. List by duration
+#### 2. List by duration
 : According to specific duration which you typed in, daily helper will show possible tasks you can do now.
 
 ![task_list_by_duration_screenshot](/app/src/main/res/drawable/task_list_by_duration_screenshot.png)
