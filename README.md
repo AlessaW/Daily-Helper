@@ -40,8 +40,9 @@ On Scheduler of <strong>Daily Helper</strong> you can list up which task you can
 
 #### 3. Edit Task
 : Added tasks can be edited when you click each task.
-<br>
-![edit_task_screenshot](/app/src/main/res/drawable/edit_task_screenshot.png)
+
+<img src="/app/src/main/res/drawable/edit_task_screenshot.png" alt=drawing width="350">
+
 
 ### Scheduler
 #### 1. Search Task by Duration
