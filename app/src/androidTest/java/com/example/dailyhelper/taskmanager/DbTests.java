@@ -71,46 +71,6 @@ public class DbTests {
 
     }
 
-    @Test
-    public void deleteTaskFromDbTest() throws InterruptedException {
-
-        updateDBTaskList();
-
-        Task oldTask = taskList.get(taskList.size()-1);
-        oldTask = new Task(oldTask.getName(), oldTask.getCategory(), oldTask.getDescription(), oldTask.getDuration(), oldTask.getPriority());
-
-        db = AppDatabase.getDbInstance(InstrumentationRegistry.getInstrumentation().getTargetContext());
-        db.TaskDao().delete(oldTask).subscribeOn(Schedulers.io())
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i("Thread Item Delete"," Processing on Thread " +Thread.currentThread().getName());
-                        Log.i("EditTaskFragment" ,"Delete the Selected Task from the Database using the id");
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
-
-        updateDBTaskList();
-
-        if (taskList.size() != 0){
-            lastTask = taskList.get(taskList.size()-1);
-
-            Log.i("The Tasks are: ", oldTask + "" + lastTask);
-
-            assertNotEquals(oldTask, lastTask);
-        }
-
-    }
-
 
     @Test
     public void updateDbTest() throws InterruptedException {
@@ -171,6 +131,48 @@ public class DbTests {
         assertNotEquals(oldTask, lastTask);
 
     }
+
+    @Test
+    public void deleteTaskFromDbTest() throws InterruptedException {
+
+        updateDBTaskList();
+
+        Task oldTask = taskList.get(taskList.size()-1);
+        oldTask = new Task(oldTask.getName(), oldTask.getCategory(), oldTask.getDescription(), oldTask.getDuration(), oldTask.getPriority());
+
+        db = AppDatabase.getDbInstance(InstrumentationRegistry.getInstrumentation().getTargetContext());
+        db.TaskDao().delete(oldTask).subscribeOn(Schedulers.io())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.i("Thread Item Delete"," Processing on Thread " +Thread.currentThread().getName());
+                        Log.i("EditTaskFragment" ,"Delete the Selected Task from the Database using the id");
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+        updateDBTaskList();
+
+        if (taskList.size() != 0){
+            lastTask = taskList.get(taskList.size()-1);
+
+            Log.i("The Tasks are: ", oldTask + "" + lastTask);
+
+            assertNotEquals(oldTask, lastTask);
+        }
+
+    }
+
+
 
 
     public void updateDBTaskList() throws InterruptedException {
