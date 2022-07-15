@@ -81,7 +81,10 @@ Die Prinzipien wurden in den folgenden Klassen umgesetzt:
 - Folgesteps werden nur gemacht, wenn die vorangegangenen erfolgreich waren
 -> Begründung: man muss nicht die Tests laufen lassen, wenn lint schon nicht erfolgreich war
 - deploy / build: nur wenn auf den Mainbranch kommt
--> builden und deployen brauchen sonst so lange, wenn ich nur Integrationstests machen will, aber es noch nicht fertig ist muss nicht jedes Mal deployed werden
+-> builden und deployen brauchen sonst so lange, wenn man nur Integrationstests machen will, aber es noch nicht fertig ist muss nicht jedes Mal deployed werden
+- Pipeline wird nur aktiviert, wenn Änderungen in relevanten Files und Ordnern erfolgt sind
+-> wenn etwas in der Dokumentation oder der Readme geändert wurde, muss dafür nicht der ganze Prozess durchgegangen werden
+
 
 
 # Bekannte Probleme
