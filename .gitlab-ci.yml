@@ -72,6 +72,7 @@ lintDebug:
       - gradlew
       - gradlew.bat
       - settings.gradle
+      - .gitlab-ci.yml
   script:
     - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
 
