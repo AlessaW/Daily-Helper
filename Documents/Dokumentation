@@ -1,11 +1,15 @@
 # Daily Helper
+Abd Algani Khrfan ak319  - Jayoung Byeun jb255 - Janosch Koutelas jk255 - Jannika Seybold js443 - Julius Steib js411 - Alessa Wiesner aw184
+
 # Projektbeschreibung
 - dreiteiliger Daily Helper mit TaskManager, Scheduler und DecisionMatrix.
 - TaskManager: ToDos speichern und bearbeiten können
 - Scheduler: zufällig zugeteilte Aufgaben aus dem TaskManager bekommen
 - DecisionMatrix: eine Tabelle, die einem hilft, Optionen nach numerischen Werten zu vergleichen und so eine objektivere Sicht auf Entscheidungen zu bekommen (diesen Teil haben wir aus Zeitgründen leider nur angefangen und nicht fertig gestellt)
+
+
 # Hauptarchitektur-Entscheidungen und Prinzipien
- #### Architektur:
+#### Architektur:
 - Model-View-Controller:
 	- gängiges Pattern um Daten zu visualisieren
 	- sinnvolles Packagemanagement dadurch möglich und leicht verständlich
@@ -18,6 +22,7 @@
 	- Task:
 		- bei Tasks haben wir uns gegen eine Factory oder ein Interface entschieden, da wir auf unnötige Abstraktionen verzichtet haben, weil wir für ein kleines Gerät nur programmieren 
 		- wäre unnötiges Aufblasen einer Klasse gewesen, die absehbar wirklich einfach nur das tun können soll, was sie aktuell kann
+
 # Reflexion
 #### Gruppenaufteilung
 - hat am Anfang etwas gebraucht, bis wir ins Tun gekommen sind
@@ -25,6 +30,7 @@
 - haben zuerst in dreier Gruppen geteilt, als das Grundgerüst dann stand haben wir je nach Größe der Aufgabe alleine oder zu zweit daran gearbeitet
 - das hat gut funktioniert
 - was wir anders machen würden: ein bisschen früher aufteilen, anstatt im großen Team alles zu versuchen zu lösen
+
 ### Aufgabenstellung
 - wir haben unsere Zeit und unsere Motivation bezüglich des Projektes maßlos überschätzt.
 - Insbesondere den MVP wollten wir sehr schnell fertig haben, bis uns klar wurde, dass wir selbst den MVP noch kleiner machen müssen
@@ -36,7 +42,9 @@
 	- kleinere Aufgabenpakete machen
 	- die Orientierung am Bewertungsbogen war sehr hilfreich, um sich immer wieder aufs Wesentliche zu besinnen
 
-# Klasendiagramm
+# Klassendiagramm
+
+
 # SOLID
 Die Prinzipien wurden in den folgenden Klassen umgesetzt:
 #### Single Responsibility
@@ -51,7 +59,7 @@ Die Prinzipien wurden in den folgenden Klassen umgesetzt:
 - Scheduler mit den Factories
 
 #### Liskovsches Substitutionsprinzip
-- RecyclerViewAdapter erweitert
+- RecyclerViewAdapter erweitert RecyclerView, statt ihn einzuschränken
 
 #### Interface-Segregation-Prinzip
 - Scheduler: haben nur die Methoden, die sie brauchen
@@ -71,3 +79,8 @@ Die Prinzipien wurden in den folgenden Klassen umgesetzt:
 -> Begründung: man muss nicht die Tests laufen lassen, wenn lint schon nicht erfolgreich war
 - deploy / build: nur wenn auf den Mainbranch kommt
 -> builden und deployen brauchen sonst so lange, wenn ich nur Integrationstests machen will, aber es noch nicht fertig ist muss nicht jedes Mal deployed werden
+
+
+# Bekannte Probleme
+## Espresso-Tests
+Bei einer Android-App gibt es noch eigene Test, sogenannte Espresso-Tests. Diese haben funktioniert, bis wir die Eingabe auf Dropdown-Menü umgestellt haben. Da dies erst relativ spät erfolgt ist, hatten wir nicht genug Zeit, den Fehler zu finden und zu beheben. Wir wissen aber, dass dies grundsätzlich bei einer App dabei sein sollte. Die normalen Unittests zur Datenbank und Modell funktioneren wie gehabt. 
