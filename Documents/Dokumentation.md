@@ -85,6 +85,7 @@ Die Prinzipien wurden in den folgenden Klassen umgesetzt:
 -> builden und deployen brauchen sonst so lange, wenn man nur Integrationstests machen will, aber es noch nicht fertig ist muss nicht jedes Mal deployed werden
 - Pipeline wird nur aktiviert, wenn Änderungen in relevanten Files und Ordnern erfolgt sind
 -> wenn etwas in der Dokumentation oder der Readme geändert wurde, muss dafür nicht der ganze Prozess durchgegangen werden
+-> Anmerkung: gerade wird die Pipeline als gefailed angezeigt, wenn etwas zum Beispiel hier in der Doku verändert wird, wenn aber eines der relevanten Files geändert wird, läuft sie ganz normal durch
 
 
 
