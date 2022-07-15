@@ -141,8 +141,11 @@ public class EditTaskFragment extends Fragment {
 
                          editTaskName.setText(task.getName());
                          editTaskCategory.setText(String.valueOf(task.getCategory()),false);
+                         category = String.valueOf(task.getCategory());
                          editTaskPriority.setText(String.valueOf(task.getPriority()),false);
+                         priority=task.getPriority();
                          editTaskDuration.setText(String.valueOf(task.getDuration()),false);
+                         duration= task.getDuration();
                          editTaskDescription.setText(task.getDescription());
                      }
 
