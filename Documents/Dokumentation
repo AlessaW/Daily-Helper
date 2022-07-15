@@ -45,6 +45,9 @@ Abd Algani Khrfan ak319  - Jayoung Byeun jb255 - Janosch Koutelas jk255 - Jannik
 # Klassendiagramm
 
 
+![Uml Class Diagramm](/UML Diagrams/UmlDiagrammFinal.png)
+
+
 # SOLID
 Die Prinzipien wurden in den folgenden Klassen umgesetzt:
 #### Single Responsibility
