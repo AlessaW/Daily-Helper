@@ -24,6 +24,7 @@ Abd Algani Khrfan ak319  - Jayoung Byeun jb255 - Janosch Koutelas jk255 - Jannik
 		- wäre unnötiges Aufblasen einer Klasse gewesen, die absehbar wirklich einfach nur das tun können soll, was sie aktuell kann
 
 # Reflexion
+
 #### Gruppenaufteilung
 - hat am Anfang etwas gebraucht, bis wir ins Tun gekommen sind
 - in Kleingruppen aufteilen hat geholfen und Aufgaben nach Priorisierung abarbeiten hat geholfen
