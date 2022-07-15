@@ -9,6 +9,7 @@
 
 image: openjdk:17-jdk-buster
 
+
 variables:
 
   # ANDROID_COMPILE_SDK is the version of Android you're compiling with.
