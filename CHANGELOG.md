@@ -1,7 +1,54 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [released]
+
+## [1.0.0] - 2022/07/15
+
+### Changed
+- finished everything up for release
+
+### Removed
+- Esspresso Tests
+
+
+## [0.2.0] - 2022/07/14
+
+### Added
+- Readme to navigate the project
+- MenuActivity as launcher activity so you can start the app and choose the function you want to use
+- DbTests for the Taskmanager
+
+### Changed
+- changed the textfields of category, duration and priority in EditTask and AddTask to drop down menus, for it to be easier to use
+
+### Fixed
+- the toString method of the Tasks so you can see everything of a task when you call it
+
+### Deprecated
+- Esspresso Tests for the Taskmanager, because they just wont work :(
+
+
+## [0.1.3] - 2022/06/30
+
+### Added
+- advanced Scheduler methods so the user can do more with the scheduler
+- a working factory for the Scheduler
+- Unit Tests for the Scheduler and Esspresso Tests for the Taskmanager
+- logging for Taskmanager
+
+### Changed
+- the launcher activity to TaskmanagerActivity
+- merged the Scheduler and Taskmanager together
+
+### Fixed
+- scheduleTask, so the Task List of Taskmanager can be used in it
+- method setCompareLength which threw a outOfBoundExepetion 
+
+### Removed
+- Task and Adapter classes in Scheduler, because it was not needed
+- The not used MainActivity and its fragments
+
 
 ## [0.1.2] - 2022/06/16
 
