@@ -3,7 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Studium Hdm/SE3/app/src/main/res/layout/activity_scheduler.xml" value="0.35778985507246375" />
+        <entry key="..\:/Studium Hdm/SE3/app/src/main/res/layout/fragment_add_duration.xml" value="0.35778985507246375" />
+        <entry key="..\:/Studium Hdm/SE3/app/src/main/res/layout/scheduler_list_item.xml" value="0.35778985507246375" />
+        <entry key="..\:/Users/Julius/StudioProjects/daily-helper/app/src/main/res/layout/fragment_add_task.xml" value="0.446875" />
+        <entry key="..\:/Users/ezyo1/Documents/daily-helper/app/src/main/res/layout/activity_task_manager.xml" value="0.10030395136778116" />
+        <entry key="..\:/Users/ezyo1/Documents/daily-helper/app/src/main/res/layout/content_main.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/ezyo1/Documents/daily-helper/app/src/main/res/layout/fragment_edit_task.xml" value="0.10030395136778116" />
+        <entry key="..\:/Users/ezyo1/Documents/daily-helper/app/src/main/res/layout/fragment_task_list.xml" value="0.1641337386018237" />
+        <entry key="..\:/Users/ezyo1/Documents/daily-helper/app/src/main/res/layout/task_list_recyclerview.xml" value="0.1641337386018237" />
         <entry key="..\:/Users/nika/Documents/01_Ausbildung/HdM/Medieninformatik/3_SE3/daily-helper/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/activity_main.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/activity_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/activity_scheduler.xml" value="0.19293478260869565" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/activity_task_manager.xml" value="0.25" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/border.xml" value="0.20199275362318841" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/button_with_border.xml" value="0.20199275362318841" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/content_main.xml" value="0.20199275362318841" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/fragment_add_duration.xml" value="0.19293478260869565" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/fragment_add_task.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/fragment_edit_task.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/fragment_first.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/fragment_task_list.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/sajaj/AndroidStudioProjects/daily-helper/daily-helper/app/src/main/res/layout/task_list_recyclerview.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/shape.xml" value="0.201" />
         <entry key="app/src/main/res/font/font.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29442149728968525" />
