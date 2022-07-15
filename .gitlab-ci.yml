@@ -63,6 +63,15 @@ before_script:
 lintDebug:
   interruptible: true
   stage: build
+  only:
+    changes:
+      - app/*
+      - .idea/*
+      - build.gradle
+      - gradle.properties
+      - gradlew
+      - gradlew.bat
+      - settings.gradle
   script:
     - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
 
